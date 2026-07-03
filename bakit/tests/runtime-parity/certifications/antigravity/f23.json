@@ -1,0 +1,11 @@
+{
+  "resolved_command": "ba-start reverse status",
+  "resolved_slug": "test-project",
+  "source_of_truth_artifact": "none",
+  "read_scope": "core/contract.yaml, core/contract-behavior.md, plans/test-project-20260424/00_reverse/reverse-baseline-lock.json, plans/test-project-20260424/00_reverse/reverse-index.md",
+  "write_target": "none",
+  "approval_gate": "NOT_REQUIRED",
+  "activation_level": "Base",
+  "fallback_code": "REVERSE_INDEX_STALE",
+  "visible_warning": "reverse index is stale; run reverse refresh before using evidence"
+}

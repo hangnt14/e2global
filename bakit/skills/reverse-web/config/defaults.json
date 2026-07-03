@@ -1,0 +1,9 @@
+{
+  "maxPages": 30,
+  "maxDepth": 3,
+  "delay": 1000,
+  "timeout": 15000,
+  "stabilityTimeout": 5000,
+  "stabilityQuietMs": 1000,
+  "screenshotFullPage": true
+}

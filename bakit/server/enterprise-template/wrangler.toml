@@ -1,0 +1,19 @@
+name = "ba-kit-enterprise"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# ── D1 Database ──────────────────────────────────────────────────────
+# After creating the database, replace the placeholder below:
+#   npx wrangler d1 create ba-kit-enterprise
+# Copy the database_id from the output and paste it here.
+[[d1_databases]]
+binding = "DB"
+database_name = "ba-kit-enterprise"
+database_id = "44d236b4-ea95-4a9f-af4b-4cae6a66c7f4"
+
+# ── Secrets (set via wrangler secret put) ────────────────────────────
+#   npx wrangler secret put ORG_TOKEN
+#   npx wrangler secret put ADMIN_TOKEN
+
+# ── Deploy: npx wrangler deploy ──────────────────────────────────────

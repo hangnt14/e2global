@@ -1,0 +1,14 @@
+
+# Local dev state (Cloudflare Wrangler)
+.wrangler/
+
+# Local database files
+data/lme.db*
+data/*.db-*
+
+# Server
+server/d1-schema.sql
+server/wrangler.toml
+server/worker.js
+server/package.json
+!server/enterprise-template/

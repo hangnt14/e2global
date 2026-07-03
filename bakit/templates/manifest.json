@@ -1,0 +1,564 @@
+{
+  "srs-template.md": {
+    "routing": {
+      "artifact": "srs",
+      "load_policy": "load full template for compiled SRS assembly only; source authoring uses srs-spec-template.md, usecase-item-template.md, ascii-screen-template.md"
+    },
+    "groups": {
+      "all": {
+        "headings": [
+          "# Đặc tả yêu cầu phần mềm (Software Requirements Specification)"
+        ]
+      }
+    }
+  },
+  "frd-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Tài liệu yêu cầu chức năng (Functional Requirements Document)"
+        ]
+      }
+    }
+  },
+  "requirements-backbone-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Xương sống yêu cầu (Requirements Backbone)"
+        ]
+      }
+    }
+  },
+  "common-rules-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Danh mục quy tắc dùng chung (Common Rules)"
+        ]
+      }
+    }
+  },
+  "message-list-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Danh sách thông điệp dùng chung (Message List)"
+        ]
+      }
+    }
+  },
+  "shared-rule-message-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Chỉ mục rule/message dùng chung (Shared Rule Message Index)"
+        ]
+      }
+    }
+  },
+  "project-home-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Trang điều phối dự án BA (Project Home)"
+        ]
+      }
+    }
+  },
+  "options-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Danh mục phương án giải pháp (Solution Options Index)"
+        ]
+      }
+    }
+  },
+  "solution-option-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Phương án giải pháp (Solution Option)"
+        ]
+      }
+    }
+  },
+  "options-comparison-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Bảng so sánh phương án (Options Comparison)"
+        ]
+      }
+    }
+  },
+  "collab-home-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Trang cộng tác BA (Collab Home)"
+        ]
+      }
+    }
+  },
+  "module-home-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Trang module BA (Module Home)"
+        ]
+      }
+    }
+  },
+  "review-packet-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Gói gửi review module (Module Review Packet)"
+        ]
+      }
+    }
+  },
+  "screen-field-contract-template.yaml": {
+    "groups": {
+      "all": {
+        "headings": [
+          "artifact_set:"
+        ]
+      }
+    }
+  },
+  "tool-lane-state-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Trạng thái tool lane (Tool Lane State)"
+        ]
+      }
+    }
+  },
+  "figma-make-shared-rules-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Quy tắc dùng chung cho Figma Make (Figma Make Shared Rules)"
+        ]
+      }
+    }
+  },
+  "figma-make-shared-prompt-skeleton-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Khung prompt dùng chung cho Figma Make (Figma Make Shared Prompt Skeleton)"
+        ]
+      }
+    }
+  },
+  "figma-make-shared-component-contracts-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Hợp đồng component dùng chung cho Figma Make (Figma Make Shared Component Contracts)"
+        ]
+      }
+    }
+  },
+  "make-guidelines-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Hướng dẫn chạy Figma Make theo module (Module Make Guidelines)"
+        ]
+      }
+    }
+  },
+  "make-prompt-pack-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Gói prompt Figma Make theo module (Module Make Prompt Pack)"
+        ]
+      }
+    }
+  },
+  "figma-make-uc-prompt-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Figma Make UC Prompt"
+        ]
+      }
+    }
+  },
+  "figma-make-uc-change-log-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Figma Make UC Change Log"
+        ]
+      }
+    }
+  },
+  "prototype-conformance-checklist-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Checklist kiểm tra conformance prototype (Prototype Conformance Checklist)"
+        ]
+      }
+    }
+  },
+  "prototype-conformance-report-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Báo cáo conformance prototype (Prototype Conformance Report)"
+        ]
+      }
+    }
+  },
+  "project-memory-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Bộ nhớ dự án (Project Memory) — Chế độ Compact/Summary"
+        ]
+      }
+    }
+  },
+  "project-memory-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Chỉ mục bộ nhớ dự án (Project Memory Index)"
+        ]
+      }
+    }
+  },
+  "project-memory-log-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Nhật ký bộ nhớ dự án (Project Memory Log)"
+        ]
+      }
+    }
+  },
+  "project-memory-hot-canonical-vocabulary-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Từ vựng chuẩn dự án (Canonical Vocabulary) — Hot Shard"
+        ]
+      }
+    }
+  },
+  "project-memory-hot-approved-decisions-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Quyết định đã chốt (Approved Decisions) — Hot Shard"
+        ]
+      }
+    }
+  },
+  "project-memory-hot-pushback-triggers-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Trigger dừng và hỏi lại (Push-back Triggers) — Hot Shard"
+        ]
+      }
+    }
+  },
+  "project-memory-module-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Bộ nhớ Module (Module Memory Shard) — Warm Tier"
+        ]
+      }
+    }
+  },
+  "project-memory-fileback-record-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Bản ghi Promotion Bộ nhớ (Memory File-Back Record)"
+        ]
+      }
+    }
+  },
+  "memory-packet-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Gói ngữ cảnh giới hạn (Bounded Context Packet)"
+        ]
+      }
+    }
+  },
+  "sub-agent-handoff-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Sub-Agent Handoff Template"
+        ]
+      }
+    }
+  },
+  "delegation-status-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Delegation Status"
+        ]
+      }
+    }
+  },
+  "source-chunk-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Chỉ mục chunk nguồn (Source Chunk Index)"
+        ]
+      }
+    }
+  },
+  "backbone-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Chỉ mục backbone (Backbone Index)"
+        ]
+      }
+    }
+  },
+  "userstories-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# User Stories Index — {module_slug}"
+        ]
+      }
+    }
+  },
+  "userstory-item-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# US-{NNN}: {story title}"
+        ]
+      }
+    }
+  },
+  "brainstorms-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Brainstorm Index — {module_slug}"
+        ]
+      }
+    }
+  },
+  "brainstorm-module-item-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Brainstorm: {topic}"
+        ]
+      }
+    }
+  },
+  "usecases-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Use Cases Index — {module_slug}"
+        ]
+      }
+    }
+  },
+  "usecase-item-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# UC-{slug}: {use case title}"
+        ]
+      }
+    }
+  },
+  "usecase-diagrams-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Use Case Diagrams — {module_slug}"
+        ]
+      }
+    }
+  },
+  "ascii-screen-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# ASCII Screen Index — {module_slug}"
+        ]
+      }
+    }
+  },
+  "ascii-screen-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SCR-{NN}: {screen title}"
+        ]
+      }
+    }
+  },
+  "srs-spec-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SRS Spec — {module_slug}"
+        ]
+      }
+    }
+  },
+  "srs-flows-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SRS Flows — {module_slug}"
+        ]
+      }
+    }
+  },
+  "srs-states-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SRS States — {module_slug}"
+        ]
+      }
+    }
+  },
+  "srs-erd-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SRS ERD — {module_slug}"
+        ]
+      }
+    }
+  },
+  "change-request-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# CR-{YYYYMMDD}-{NNN}: {change title}"
+        ]
+      }
+    }
+  },
+  "impact-report-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Impact Report — CR-{YYYYMMDD}-{NNN}"
+        ]
+      }
+    }
+  },
+  "shared-traceability-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Shared Traceability — {slug}"
+        ]
+      }
+    }
+  },
+  "shared-staleness-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Shared Staleness — {slug}"
+        ]
+      }
+    }
+  },
+  "shared-definitions-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Shared Definitions — {slug}"
+        ]
+      }
+    }
+  },
+  "shared-shell-contract-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Shared Shell Contract"
+        ]
+      }
+    }
+  },
+  "shared-shell-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Shared Shell Index"
+        ]
+      }
+    }
+  },
+  "srs-compile-receipt-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# SRS Compile Receipt"
+        ]
+      }
+    }
+  },
+  "figma-sync-report-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Figma Sync Report"
+        ]
+      }
+    }
+  },
+  "figma-mismatch-report-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Figma Mismatch Report"
+        ]
+      }
+    }
+  },
+  "reverse-baseline-lock-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Reverse Baseline Lock"
+        ]
+      }
+    }
+  },
+  "reverse-index-template.md": {
+    "groups": {
+      "all": {
+        "headings": [
+          "# Reverse Index"
+        ]
+      }
+    }
+  }
+}

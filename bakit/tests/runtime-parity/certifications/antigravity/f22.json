@@ -1,0 +1,10 @@
+{
+  "resolved_command": "ba-start reverse",
+  "resolved_slug": "test-project",
+  "source_of_truth_artifact": "none",
+  "read_scope": "core/contract.yaml, core/contract-behavior.md",
+  "write_target": "none",
+  "approval_gate": "FOCUS_SELECTION_REQUIRED",
+  "activation_level": "Base",
+  "fallback_code": "FOCUS_SELECTION_PENDING"
+}

@@ -1,0 +1,10 @@
+{
+  "resolved_command": "ba-start reverse",
+  "resolved_slug": "test-project",
+  "source_of_truth_artifact": "none",
+  "read_scope": "core/contract.yaml, core/contract-behavior.md, committed source files in focus area",
+  "write_target": "plans/test-project-20260424/00_reverse/",
+  "approval_gate": "NOT_REQUIRED",
+  "activation_level": "Base",
+  "fallback_code": "NONE"
+}

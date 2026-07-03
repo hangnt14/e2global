@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "paths": {
+    "project_root": "plans/{slug}-{date}",
+    "module_root": "plans/{slug}-{date}/03_modules/{module_slug}",
+    "usecases_root": "plans/{slug}-{date}/03_modules/{module_slug}/usecases",
+    "userstories_root": "plans/{slug}-{date}/03_modules/{module_slug}/userstories",
+    "ascii_screen_root": "plans/{slug}-{date}/03_modules/{module_slug}/ascii-screen",
+    "common_rules": "plans/{slug}-{date}/02_backbone/common-rules.md",
+    "message_list": "plans/{slug}-{date}/02_backbone/message-list.md",
+    "qc_export_root": "plans/{slug}-{date}/04_compiled/qc-kit",
+    "qc_export_usecase_dir": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/UC-{usecase_slug}-screens",
+    "qc_export_usecase_file": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/UC-{usecase_slug}.md",
+    "qc_export_usecase_list": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/usecase-list.md",
+    "backbone": "plans/{slug}-{date}/02_backbone/backbone.md"
+  }
+}

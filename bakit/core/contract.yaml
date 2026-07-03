@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "defaults": {
+    "language": "vi",
+    "date_token_format": "YYMMDD-HHmm",
+    "mode": "hybrid",
+    "ui_baseline": "Shadcn UI",
+    "platform": "mobile"
+  },
+  "states": {
+    "tool_lane": ["manual", "figma-make", "not-applicable"],
+    "delegation": ["queued", "running", "completed", "needs-repartition", "blocked", "failed"],
+    "heartbeat_minutes": 5,
+    "stall_after_minutes": 10
+  },
+  "paths": {
+    "project_root": "plans/{slug}-{date}",
+    "source_cache_root": "plans/_source-cache/{source_hash}",
+    "source_promoted_root": "plans/{slug}-{date}/00_source",
+    "source_manifest": "plans/{slug}-{date}/00_source/manifest.json",
+    "source_summary": "plans/{slug}-{date}/00_source/summary.md",
+    "source_chunks_dir": "plans/{slug}-{date}/00_source/chunks",
+    "source_chunk_index": "plans/{slug}-{date}/00_source/chunk-index.md",
+    "project_home": "plans/{slug}-{date}/PROJECT-HOME.md",
+    "design_root": "designs/{slug}",
+    "compiled_root": "plans/{slug}-{date}/04_compiled",
+    "delegation_root": "plans/{slug}-{date}/delegation",
+    "collab_home": "plans/{slug}-{date}/COLLAB-HOME.md",
+    "module_home": "plans/{slug}-{date}/03_modules/{module_slug}/MODULE-HOME.md",
+    "review_packet": "plans/{slug}-{date}/delegation/review-packets/{module_slug}.md",
+    "intake": "plans/{slug}-{date}/01_intake/intake.md",
+    "plan": "plans/{slug}-{date}/01_intake/plan.md",
+    "options_root": "plans/{slug}-{date}/01_intake/options",
+    "options_index": "plans/{slug}-{date}/01_intake/options/index.md",
+    "option_item": "plans/{slug}-{date}/01_intake/options/option-{option}.md",
+    "options_comparison": "plans/{slug}-{date}/01_intake/options/comparison.md",
+    "backbone": "plans/{slug}-{date}/02_backbone/backbone.md",
+    "backbone_index": "plans/{slug}-{date}/02_backbone/backbone-index.md",
+    "module_root": "plans/{slug}-{date}/03_modules/{module_slug}",
+    "frd": "plans/{slug}-{date}/03_modules/{module_slug}/frd.md",
+    "brainstorm_root": "plans/{slug}-{date}/03_modules/{module_slug}/brainstorms",
+    "brainstorm_index": "plans/{slug}-{date}/03_modules/{module_slug}/brainstorms/index.md",
+    "brainstorm_item": "plans/{slug}-{date}/03_modules/{module_slug}/brainstorms/{brainstorm_slug}.md",
+    "userstories_root": "plans/{slug}-{date}/03_modules/{module_slug}/userstories",
+    "userstories_index": "plans/{slug}-{date}/03_modules/{module_slug}/userstories/index.md",
+    "userstory_item": "plans/{slug}-{date}/03_modules/{module_slug}/userstories/us-{slug}.md",
+    "usecases_root": "plans/{slug}-{date}/03_modules/{module_slug}/usecases",
+    "usecases_index": "plans/{slug}-{date}/03_modules/{module_slug}/usecases/index.md",
+    "usecase_item": "plans/{slug}-{date}/03_modules/{module_slug}/usecases/uc-{usecase_slug}.md",
+    "usecase_diagrams": "plans/{slug}-{date}/03_modules/{module_slug}/usecases/diagrams.md",
+    "ascii_screen_root": "plans/{slug}-{date}/03_modules/{module_slug}/ascii-screen",
+    "ascii_screen_index": "plans/{slug}-{date}/03_modules/{module_slug}/ascii-screen/index.md",
+    "ascii_screen_item": "plans/{slug}-{date}/03_modules/{module_slug}/ascii-screen/{screen_slug}.md",
+    "srs_root": "plans/{slug}-{date}/03_modules/{module_slug}/srs",
+    "srs_spec": "plans/{slug}-{date}/03_modules/{module_slug}/srs/spec.md",
+    "srs_flows": "plans/{slug}-{date}/03_modules/{module_slug}/srs/flows.md",
+    "srs_states": "plans/{slug}-{date}/03_modules/{module_slug}/srs/states.md",
+    "srs_erd": "plans/{slug}-{date}/03_modules/{module_slug}/srs/erd.md",
+    "srs": "plans/{slug}-{date}/03_modules/{module_slug}/srs.md",
+    "srs_compile_receipt": "plans/{slug}-{date}/03_modules/{module_slug}/srs-compile-receipt.json",
+    "changes_root": "plans/{slug}-{date}/changes",
+    "change_request": "plans/{slug}-{date}/changes/CR-{change_id}.md",
+    "impacts_root": "plans/{slug}-{date}/impacts",
+    "impact_report": "plans/{slug}-{date}/impacts/CR-{change_id}-impact.md",
+    "shared_root": "plans/{slug}-{date}/shared",
+    "shared_traceability": "plans/{slug}-{date}/shared/traceability.md",
+    "shared_staleness": "plans/{slug}-{date}/shared/staleness.md",
+    "shared_definitions": "plans/{slug}-{date}/shared/definitions.md",
+    "audit_report": "plans/{slug}-{date}/shared/audit-report.md",
+    "figma_sync_report": "plans/{slug}-{date}/03_modules/{module_slug}/figma-sync/figma-sync-report.md",
+    "figma_mismatch_report": "plans/{slug}-{date}/03_modules/{module_slug}/figma-sync/figma-mismatch-report.md",
+    "screen_field_contract": "plans/{slug}-{date}/03_modules/{module_slug}/screen-field-contract.yaml",
+    "tool_lane_state": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/tool-lane-state.md",
+    "make_guidelines": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/make-guidelines.md",
+    "make_prompt_pack": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/make-prompt-pack.md",
+    "make_uc_prompt": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/usecases/uc-{usecase_slug}-make-prompt.md",
+    "make_uc_change_log": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/usecases/uc-{usecase_slug}-change-log.md",
+    "prototype_conformance_checklist": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/prototype-conformance-checklist.md",
+    "prototype_conformance_report": "plans/{slug}-{date}/03_modules/{module_slug}/tool-lanes/figma-make/prototype-conformance-report.md",
+    "compiled_frd": "plans/{slug}-{date}/04_compiled/compiled-frd.html",
+    "compiled_srs": "plans/{slug}-{date}/04_compiled/compiled-srs.html",
+    "compiled_srs_module": "plans/{slug}-{date}/04_compiled/{module_slug}/compiled-srs.html",
+    "tool_lanes_root": "plans/{slug}-{date}/05_tool-lanes",
+    "figma_make_root": "plans/{slug}-{date}/05_tool-lanes/figma-make",
+    "figma_make_shared_rules": "plans/{slug}-{date}/05_tool-lanes/figma-make/shared-rules.md",
+    "figma_make_shared_prompt_skeleton": "plans/{slug}-{date}/05_tool-lanes/figma-make/shared-prompt-skeleton.md",
+    "figma_make_shared_component_contracts": "plans/{slug}-{date}/05_tool-lanes/figma-make/shared-component-contracts.md",
+    "stitch_lane_root": "plans/{slug}-{date}/05_tool-lanes/stitch",
+    "stitch_design_system_id": "plans/{slug}-{date}/05_tool-lanes/stitch/stitch-design-system-id.json",
+    "stitch_screen_map": "plans/{slug}-{date}/05_tool-lanes/stitch/stitch-screen-map.json",
+    "stitch_sync_report": "plans/{slug}-{date}/05_tool-lanes/stitch/stitch-sync-report.md",
+    "stitch_mismatch_report": "plans/{slug}-{date}/05_tool-lanes/stitch/stitch-mismatch-report.md",
+    "design_doc": "designs/{slug}/DESIGN.md",
+    "shared_shell_contract": "plans/{slug}-{date}/02_backbone/shared-shell-contract.md",
+    "shared_shell_index": "plans/{slug}-{date}/02_backbone/shared-shell-index.md",
+    "common_rules": "plans/{slug}-{date}/02_backbone/common-rules.md",
+    "message_list": "plans/{slug}-{date}/02_backbone/message-list.md",
+    "control_type_library": "plans/{slug}-{date}/02_backbone/control-type-library.md",
+    "control_type_library_template": "templates/control-type-library-template.md",
+    "check_freshness_state": "~/.claude/ba-kit/state/last-freshness-check.json",
+    "shared_rule_message_index": "plans/{slug}-{date}/02_backbone/shared-rule-message-index.md",
+    "project_memory": "plans/{slug}-{date}/02_backbone/project-memory.md",
+    "memory_root": "plans/{slug}-{date}/02_backbone/project-memory",
+    "memory_index": "plans/{slug}-{date}/02_backbone/project-memory/index.md",
+    "memory_log": "plans/{slug}-{date}/02_backbone/project-memory/log.md",
+    "memory_hot": "plans/{slug}-{date}/02_backbone/project-memory/hot",
+    "memory_warm": "plans/{slug}-{date}/02_backbone/project-memory/warm",
+    "memory_cold": "plans/{slug}-{date}/02_backbone/project-memory/cold",
+    "memory_hot_vocabulary": "plans/{slug}-{date}/02_backbone/project-memory/hot/canonical-vocabulary.md",
+    "memory_hot_decisions": "plans/{slug}-{date}/02_backbone/project-memory/hot/approved-decisions.md",
+    "memory_hot_pushback": "plans/{slug}-{date}/02_backbone/project-memory/hot/pushback-triggers.md",
+    "memory_module_warm": "plans/{slug}-{date}/02_backbone/project-memory/warm/modules/{module_slug}.md",
+    "packet_root": "plans/{slug}-{date}/delegation/packets",
+    "behavior_base": "core/contract-behavior.md",
+    "behavior_root": "core/behavior",
+    "behavior_intake": "core/behavior/intake.md",
+    "behavior_backbone": "core/behavior/backbone.md",
+    "behavior_impact": "core/behavior/impact.md",
+    "behavior_module_authoring": "core/behavior/module-authoring.md",
+    "behavior_srs": "core/behavior/srs.md",
+    "behavior_wireframes": "core/behavior/wireframes.md",
+    "behavior_figma_sync": "core/behavior/figma-sync.md",
+    "behavior_stitch_sync": "core/behavior/stitch-sync.md",
+    "behavior_package_status_next": "core/behavior/package-status-next.md",
+    "impact_receipt": "plans/{slug}-{date}/02_backbone/impact-receipt.md",
+    "options_receipt": "plans/{slug}-{date}/01_intake/options/options-receipt.md",
+    "index_validation_receipt": "plans/{slug}-{date}/02_backbone/index-validation-receipt.md",
+    "package_snapshot": "plans/{slug}-{date}/02_backbone/package-snapshot.md",
+    "reverse_root": "plans/{slug}-{date}/00_reverse",
+    "reverse_baseline_lock": "plans/{slug}-{date}/00_reverse/reverse-baseline-lock.json",
+    "reverse_index": "plans/{slug}-{date}/00_reverse/reverse-index.md",
+    "reverse_focus_excerpts": "plans/{slug}-{date}/00_reverse/reverse-focus-excerpts.md",
+    "reverse_evidence_ledger": "plans/{slug}-{date}/00_reverse/reverse-evidence-ledger.md",
+    "reverse_drift_state": "plans/{slug}-{date}/00_reverse/reverse-drift-state.json",
+    "reverse_read_manifest": "plans/{slug}-{date}/00_reverse/reverse-read-manifest.ndjson",
+    "behavior_reverse": "core/behavior/reverse.md",
+    "qc_output_root": "plans/{slug}-{date}/03_modules/{module_slug}/qc-review",
+    "qc_report": "plans/{slug}-{date}/03_modules/{module_slug}/qc-review/{module_slug}-qc-review-report-v{N}.md",
+    "qc_backlog": "plans/{slug}-{date}/03_modules/{module_slug}/qc-review/{module_slug}-qc-review-question-backlog.md",
+    "behavior_qc_review": "core/behavior/qc-review.md",
+    "qc_export_root": "plans/{slug}-{date}/04_compiled/qc-kit",
+    "qc_export_docs_ba": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA",
+    "qc_export_common_rules": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/Common rule/common-rules.md",
+    "qc_export_message_list": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/Common rule/message-list.md",
+    "qc_export_usecase_dir": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/UC-{usecase_slug}-screens",
+    "qc_export_usecase_file": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/UC-{usecase_slug}.md",
+    "qc_export_summary": "plans/{slug}-{date}/04_compiled/qc-kit/qc-export-summary.json",
+    "qc_export_usecase_list": "plans/{slug}-{date}/04_compiled/qc-kit/docs/BA/{module}/usecase-list.md"
+  },
+  "artifact_profiles": {
+    "source_manifest": "machine_facing",
+    "source_summary": "agent_facing",
+    "source_chunk_index": "agent_facing",
+    "project_home": "user_facing",
+    "collab_home": "user_facing",
+    "module_home": "user_facing",
+    "review_packet": "agent_facing",
+    "intake": "user_facing",
+    "plan": "agent_facing",
+    "options_index": "agent_facing",
+    "option_item": "user_facing",
+    "options_comparison": "user_facing",
+    "backbone": "user_facing",
+    "backbone_index": "agent_facing",
+    "frd": "user_facing",
+    "brainstorm_root": "agent_facing",
+    "brainstorm_index": "agent_facing",
+    "brainstorm_item": "user_facing",
+    "userstories_root": "agent_facing",
+    "userstories_index": "agent_facing",
+    "userstory_item": "user_facing",
+    "usecases_root": "agent_facing",
+    "usecases_index": "agent_facing",
+    "usecase_item": "user_facing",
+    "usecase_diagrams": "user_facing",
+    "ascii_screen_root": "agent_facing",
+    "ascii_screen_index": "agent_facing",
+    "ascii_screen_item": "user_facing",
+    "srs_root": "agent_facing",
+    "srs_spec": "user_facing",
+    "srs_flows": "user_facing",
+    "srs_states": "user_facing",
+    "srs_erd": "user_facing",
+    "srs": "user_facing",
+    "srs_compile_receipt": "machine_facing",
+    "changes_root": "agent_facing",
+    "change_request": "user_facing",
+    "impacts_root": "agent_facing",
+    "impact_report": "user_facing",
+    "shared_root": "agent_facing",
+    "shared_traceability": "agent_facing",
+    "shared_staleness": "agent_facing",
+    "shared_definitions": "agent_facing",
+    "audit_report": "agent_facing",
+    "figma_sync_report": "agent_facing",
+    "figma_mismatch_report": "agent_facing",
+    "screen_field_contract": "machine_facing",
+    "tool_lane_state": "machine_facing",
+    "make_guidelines": "agent_facing",
+    "make_prompt_pack": "agent_facing",
+    "make_uc_prompt": "agent_facing",
+    "make_uc_change_log": "agent_facing",
+    "prototype_conformance_checklist": "agent_facing",
+    "prototype_conformance_report": "user_facing",
+    "figma_make_shared_rules": "agent_facing",
+    "figma_make_shared_prompt_skeleton": "agent_facing",
+    "figma_make_shared_component_contracts": "agent_facing",
+    "stitch_design_system_id": "machine_facing",
+    "stitch_screen_map": "machine_facing",
+    "stitch_sync_report": "agent_facing",
+    "stitch_mismatch_report": "agent_facing",
+    "compiled_frd": "user_facing",
+    "compiled_srs": "user_facing",
+    "compiled_srs_module": "user_facing",
+    "design_doc": "agent_facing",
+    "shared_shell_contract": "agent_facing",
+    "shared_shell_index": "agent_facing",
+    "common_rules": "agent_facing",
+    "message_list": "agent_facing",
+    "shared_rule_message_index": "agent_facing",
+    "project_memory": "agent_facing",
+    "memory_index": "agent_facing",
+    "memory_log": "agent_facing",
+    "memory_hot_vocabulary": "agent_facing",
+    "memory_hot_decisions": "agent_facing",
+    "memory_hot_pushback": "agent_facing",
+    "memory_module_warm": "agent_facing",
+    "impact_receipt": "machine_facing",
+    "options_receipt": "machine_facing",
+    "index_validation_receipt": "machine_facing",
+    "package_snapshot": "machine_facing",
+    "reverse_baseline_lock": "machine_facing",
+    "reverse_index": "agent_facing",
+    "reverse_focus_excerpts": "agent_facing",
+    "reverse_evidence_ledger": "agent_facing",
+    "reverse_drift_state": "machine_facing",
+    "reverse_read_manifest": "machine_facing"
+  },
+  "patterns": {
+    "date_token": "^\\d{6}-\\d{4}$",
+    "project_dir": "^(.+)-(\\d{6}-\\d{4})$"
+  },
+  "resolution": {
+    "slug_sources": ["explicit", "project_directories"],
+    "date_sources": ["explicit", "project_directory"],
+    "module_sources": ["explicit", "single_module_only"],
+    "strict_exact_match": true,
+    "never_use_mtime": true
+  },
+  "legacy": {
+    "roots": ["plans/reports", "plans/reports/final", "plans/reports/drafts"],
+    "blocked_patterns": ["plans/reports/002-intake-form.md", "plans/reports/002-gap-analysis.md", "plans/reports/002-*.md", "plans/reports/final/*", "plans/reports/drafts/*"]
+  },
+  "commands": {
+    "intake": {
+      "module_required": false,
+      "mutable": true,
+      "requires": [],
+      "outputs": ["project_home", "source_summary", "source_chunks_dir", "source_chunk_index", "intake", "plan"]
+    },
+    "impact": {
+      "module_required": false,
+      "mutable": false,
+      "requires": ["intake"],
+      "outputs": []
+    },
+    "options": {
+      "module_required": false,
+      "mutable": true,
+      "requires": ["intake"],
+      "outputs": ["project_home", "plan", "options_index", "options_comparison"]
+    },
+    "backbone": {
+      "module_required": false,
+      "mutable": true,
+      "requires": ["intake"],
+      "outputs": ["project_home", "backbone", "backbone_index", "common_rules", "message_list", "shared_rule_message_index", "control_type_library", "project_memory", "design_doc", "shared_shell_contract", "shared_shell_index"],
+      "notes": "System-level artifact. When UI-backed scope exists, backbone MUST create design_doc and shared_shell_contract covering ALL portals in the Portal Matrix. Module BAs must not create or modify these files."
+    },
+    "frd": {
+      "module_required": true,
+      "mutable": true,
+      "requires": ["backbone"],
+      "outputs": ["frd"]
+    },
+    "stories": {
+      "module_required": true,
+      "mutable": true,
+      "requires": ["backbone"],
+      "outputs": ["userstories_index", "userstory_item"]
+    },
+    "srs": {
+      "module_required": true,
+      "mutable": true,
+      "requires": ["backbone", "userstories_index"],
+      "outputs": ["srs_spec", "srs_flows", "srs_states", "srs_erd", "usecases_index", "usecase_item", "usecase_diagrams", "ascii_screen_index", "ascii_screen_item", "srs", "srs_compile_receipt", "screen_field_contract"],
+      "notes": "Canon-first SRS command. Source set is folder-based: srs/spec.md, srs/flows.md, srs/states.md, srs/erd.md, usecases/*, ascii-screen/*. srs.md is compiled output only. Receipt must define requested scope and source hashes. Backbone authority: module artifacts must trace to backbone; misalignment produces BACKBONE_ALIGNMENT_FAIL. DESIGN.md and shared-shell-contract are system-level prerequisites (created by backbone), not SRS outputs."
+    },
+    "wireframes": {
+      "module_required": true,
+      "mutable": false,
+      "requires": ["ascii_screen_index", "srs_compile_receipt"],
+      "outputs": [],
+      "notes": "Deprecated compatibility inspection command. Do not create legacy wireframe pack artifacts. ASCII wireframes are mandatory inside ascii-screen canon files and compiled through srs."
+    },
+    "figma-sync": {
+      "module_required": true,
+      "mutable": true,
+      "requires": ["ascii_screen_index", "srs_compile_receipt", "design_doc", "shared_shell_contract"],
+      "outputs": ["figma_sync_report", "figma_mismatch_report"],
+      "notes": "Separate downstream visual consumer. Reads ascii-screen/index.md and screen files. It may interact with Figma MCP and write sync/mismatch reports, but it must not mutate BA canon sources, shared shell contracts, or compiled SRS."
+    },
+    "stitch-sync": {
+      "module_required": true,
+      "mutable": true,
+      "requires": ["ascii_screen_index", "srs_compile_receipt", "design_doc", "shared_shell_contract"],
+      "outputs": ["stitch_sync_report", "stitch_mismatch_report", "stitch_design_system_id", "stitch_screen_map"],
+      "notes": "Downstream visual consumer. Reads screen canon and DESIGN.md, bootstraps Stitch design system, generates consistent UI screens via Stitch MCP. Must not mutate BA canon sources, shared shell contracts, or compiled SRS. Blocks immediately if Stitch MCP is unreachable. Supports --device DESKTOP|MOBILE|TABLET|AGNOSTIC (default DESKTOP). Refresh triggers full regeneration — old screens destroyed."
+    },
+    "package": {
+      "module_required": false,
+      "mutable": true,
+      "requires": [],
+      "outputs": ["compiled_frd", "compiled_srs"]
+    },
+    "status": {
+      "module_required": false,
+      "mutable": false,
+      "requires": [],
+      "outputs": []
+    },
+    "next": {
+      "module_required": false,
+      "mutable": false,
+      "requires": [],
+      "outputs": []
+    },
+    "reverse": {
+      "module_required": false,
+      "mutable": true,
+      "requires": [],
+      "outputs": ["reverse_baseline_lock", "reverse_index", "reverse_read_manifest"],
+      "notes": "Entry command for reverse mode. Performs baseline scan and locks documented_commit. Requires focus_selection before evidence promotion."
+    },
+    "reverse_status": {
+      "module_required": false,
+      "mutable": false,
+      "requires": ["reverse_baseline_lock"],
+      "outputs": [],
+      "notes": "Shows reverse lane progress: baseline lock state, focus areas, drift status, evidence ledger summary."
+    },
+    "reverse_refresh": {
+      "module_required": false,
+      "mutable": true,
+      "requires": ["reverse_baseline_lock"],
+      "outputs": ["reverse_index", "reverse_drift_state", "reverse_read_manifest"],
+      "notes": "Re-scans codebase/docs against a new commit. Updates drift state relative to documented_commit."
+    },
+    "reverse_promote": {
+      "module_required": false,
+      "mutable": true,
+      "requires": ["reverse_baseline_lock", "reverse_evidence_ledger"],
+      "outputs": ["backbone", "backbone_index"],
+      "notes": "Promotes validated evidence from reverse_evidence_ledger into canonical backbone or SRS. Requires explicit user approval per promotion batch."
+    },
+    "reverse_impact": {
+      "module_required": false,
+      "mutable": false,
+      "requires": ["reverse_baseline_lock", "reverse_evidence_ledger"],
+      "outputs": [],
+      "notes": "Classifies each pending change as as_built_drift, future_state_request, or mixed_change. Does not mutate artifacts."
+    },
+    "qc-review": {
+      "module_required": true,
+      "mutable": false,
+      "requires": ["srs"],
+      "outputs": ["qc_report", "qc_backlog"],
+      "notes": "Audit module SRS canon for test-readiness. Non-mutable: reads backbone first, then userstories/index.md, usecases/index.md, ascii-screen/index.md, srs/spec.md, srs/flows.md, srs/states.md, srs/erd.md. Compiled srs.md is supporting evidence only. Backbone alignment gate runs before scoring."
+    }
+  },
+  "quality_gates": {
+    "post_srs_module_qc": {
+      "invoke": "qc-review",
+      "min_version": "1.0.0",
+      "profile": "full-10ka",
+      "platform": "${defaults.platform}",
+      "block_on": "score < 70",
+      "trigger_after": "srs"
+    }
+  },
+  "behavior_shards": {
+    "intake": ["behavior_intake"],
+    "options": ["behavior_backbone"],
+    "backbone": ["behavior_backbone"],
+    "impact": ["behavior_impact"],
+    "frd": ["behavior_module_authoring"],
+    "stories": ["behavior_module_authoring"],
+    "srs": ["behavior_srs"],
+    "wireframes": ["behavior_wireframes"],
+    "figma-sync": ["behavior_figma_sync"],
+    "stitch-sync": ["behavior_stitch_sync"],
+    "package": ["behavior_package_status_next"],
+    "status": ["behavior_package_status_next"],
+    "next": ["behavior_package_status_next"],
+    "reverse": ["behavior_reverse"],
+    "reverse_status": ["behavior_reverse"],
+    "reverse_refresh": ["behavior_reverse"],
+    "reverse_promote": ["behavior_reverse"],
+    "reverse_impact": ["behavior_reverse"],
+    "qc-review": ["behavior_qc_review"]
+  },
+  "source_of_truth_order": ["backbone", "intake"],
+  "next_step_order": ["intake", "options", "backbone", "frd", "stories", "srs", "stitch-sync", "package", "status"],
+  "reverse": {
+    "canonical": false,
+    "evidence_zone": true,
+    "note": "00_reverse artifacts are supporting evidence only. They are NOT in source_of_truth_order. Canonical artifacts (backbone, SRS, FRD) remain the source of truth. Reverse evidence must be explicitly promoted via reverse_promote before it affects canonical artifacts.",
+    "documented_commit_required": true,
+    "v1_constraints": {
+      "source_only": true,
+      "no_runtime_probes": true,
+      "no_app_execution": true,
+      "no_live_endpoint_verification": true
+    },
+    "change_lanes": ["as_built_drift", "future_state_request", "mixed_change"]
+  },
+  "routing": {
+    "impact": {
+      "scope_lock_change": "intake",
+      "backbone_change": "backbone",
+      "story_detail_change": "stories",
+      "srs_behavior_change": "srs",
+      "ui_impact_follow_up": "srs"
+    }
+  },
+  "output_modes": {
+    "probe": {
+      "fields": ["output_mode", "status", "command", "resolved_slug", "message"],
+      "use_when": "no-op, clarification, or block verdict"
+    },
+    "delta": {
+      "fields": ["output_mode", "status", "command", "resolved_slug", "message", "indexes", "action_guardrail", "allow_reads", "excerpt_path"],
+      "use_when": "index-first action with changed state"
+    },
+    "full": {
+      "fields": ["output_mode", "status", "command", "resolved_slug", "message", "indexes", "action_guardrail", "allow_reads", "excerpt_path", "deny_reads", "canonical_state_summary", "canonical_next_command", "refresh_command"],
+      "use_when": "escalation, broad read, or first-run with no index"
+    }
+  },
+  "templates": {
+    "manifest": "templates/manifest.json"
+  },
+  "memory": {
+    "compact_fallback": "active when only project_memory file exists and memory_root directory is absent",
+    "index_role": "bounded navigator routing to shards and modules; must not become a second monolith",
+    "log_role": "optional append-only chronology support; excluded from normal command reads",
+    "cold_default": "never loaded by default; only via explicit escalation",
+    "shard_tree_optional": true,
+    "migration_scope_excludes_roadmap_dirs": true
+  },
+  "activation": {
+    "levels": ["Base", "Modular", "Program"],
+    "default": "Base",
+    "provisional_until_fixture_validation": false,
+    "thresholds": {
+      "modular": {
+        "any_of": [
+          {
+            "signal": "module_count",
+            "operator": "gte",
+            "value": 2
+          },
+          {
+            "signal": "owner_count",
+            "operator": "gte",
+            "value": 2
+          }
+        ]
+      },
+      "program": {
+        "any_of": [
+          {
+            "signal": "cross_module_dependency",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "signal": "delegation_slice_count",
+            "operator": "gte",
+            "value": 2
+          },
+          {
+            "all_of": [
+              {
+                "signal": "owner_count",
+                "operator": "gte",
+                "value": 2
+              },
+              {
+                "signal": "delegation_slice_count",
+                "operator": "gte",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "signals": {
+      "module_count": {
+        "source": "count module directories under paths.module_root parent",
+        "compact_fallback": 1
+      },
+      "owner_count": {
+        "source": "distinct owners declared in memory index/module metadata",
+        "compact_fallback": 1
+      },
+      "cross_module_dependency": {
+        "source": "explicit flag or listed dependency in memory index",
+        "compact_fallback": false
+      },
+      "delegation_slice_count": {
+        "source": "count active/queued trackers under paths.delegation_root, excluding archive",
+        "compact_fallback": 0
+      },
+      "source_chunk_count": {
+        "source": "count chunk files under paths.source_chunks_dir",
+        "compact_fallback": 0
+      },
+      "backbone_bytes": {
+        "source": "byte size of paths.backbone",
+        "compact_fallback": 0
+      },
+      "stories_bytes": {
+        "source": "sum byte size of userstory item files under paths.userstories_root",
+        "compact_fallback": 0
+      },
+      "srs_total_bytes": {
+        "source": "sum byte size of paths.srs and srs source files under paths.srs_root",
+        "compact_fallback": 0
+      },
+      "artifact_total_bytes": {
+        "source": "sum byte size of active BA artifacts under paths.project_root",
+        "compact_fallback": 0
+      }
+    },
+    "context_thresholds": {
+      "source_chunk_count": 8,
+      "backbone_bytes": 25000,
+      "stories_bytes": 25000,
+      "srs_total_bytes": 30000,
+      "artifact_total_bytes": 80000
+    },
+    "lifecycle": {
+      "auto_escalation": true,
+      "auto_downgrade": false,
+      "downgrade_requires": "explicit activation refresh after archival or project simplification",
+      "threshold_locking": "locked for v1 after fixture validation; runtime parity execution is exempted by maintainer release decision"
+    },
+    "persisted_state_path": "paths.memory_index",
+    "compact_fallback_state_path": "paths.project_memory"
+  }
+}

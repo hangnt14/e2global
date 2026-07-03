@@ -1,0 +1,41 @@
+# BA-kit guardrail scripts — shared source for all install scripts
+# Format: one script per line. Lines starting with # are comments.
+# Runtime-specific scripts are tagged: [claude] [codex] [antigravity]
+# Untagged scripts are installed for ALL runtimes.
+#
+# Usage: install-*.sh calls load_guardrail_scripts <runtime>
+# which filters this file by tag and populates GUARDRAIL_SCRIPTS array.
+
+# Core guardrails (all runtimes)
+guardrail-preflight.py
+guardrail-build-excerpts.py
+guardrail-audit.py
+guardrail_common.py
+validate-index-quality.py
+check-token-budget.py
+check-write-scope.py
+compile-srs.py
+check-srs-template-compliance.py
+md-to-html.py
+
+# Screen behaviour enforcement (Claude Code + Antigravity only)
+[claude] check-screen-behaviour.py
+[antigravity] check-screen-behaviour.py
+
+# Context budget guards (Claude Code + Codex only)
+[claude] context-output-guard.py
+[claude] context-preflight-guard.py
+[claude] context-budget-bootstrap.py
+[codex] context-output-guard.py
+[codex] context-preflight-guard.py
+[codex] context-budget-bootstrap.py
+
+# Control Type & Behaviour validation (Phase 1-4, all runtimes)
+check-control-type-compliance.py
+check-message-placement.py
+validate-cr-coverage.py
+check-terminology-consistency.py
+
+# Freshness & Output verification (Phase 5, all runtimes)
+check-freshness.py
+verify-compiled-output.py

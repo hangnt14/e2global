@@ -1,0 +1,31 @@
+{
+  "plan": {
+    "namingFormat": "{date}-{slug}",
+    "dateFormat": "YYMMDD-HHmm"
+  },
+  "paths": {
+    "docs": "docs",
+    "plans": "plans",
+    "templates": "templates",
+    "designs": "designs"
+  },
+  "project": {
+    "type": "business-analysis",
+    "methodology": "hybrid"
+  },
+  "runtimes": {
+    "supported": ["claude-code", "codex", "antigravity"],
+    "installers": {
+      "claude-code": "install.sh",
+      "codex": "scripts/install-codex-ba-kit.sh",
+      "antigravity": "scripts/install-antigravity-ba-kit.sh"
+    }
+  },
+  "assertions": [
+    "All requirements must have acceptance criteria",
+    "Use BABOK 3.0 knowledge areas as reference",
+    "Always validate requirements against business goals",
+    "Use PlantUML for swimlanes and Mermaid.js for other diagrams",
+    "SRS is default when UI screens or system interactions are present"
+  ]
+}

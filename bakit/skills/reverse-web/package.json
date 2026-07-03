@@ -1,0 +1,23 @@
+{
+  "name": "@ba-kit/reverse-web",
+  "version": "1.0.0",
+  "description": "BA-kit skill: reverse-engineer a live website into BA intake documentation",
+  "type": "module",
+  "scripts": {
+    "setup": "npx playwright install chromium",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration"
+  },
+  "dependencies": {
+    "commander": "13.1.0",
+    "playwright": "1.55.1"
+  },
+  "devDependencies": {
+    "express": "4.21.2",
+    "vitest": "4.1.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

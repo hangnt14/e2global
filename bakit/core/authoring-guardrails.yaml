@@ -1,0 +1,105 @@
+version: 1
+
+severity:
+  block:
+    - source_of_truth_violation
+    - shared_shell_ownership_violation
+    - missing_required_canon_section
+    - stale_compiled_srs
+    - invalid_index_path
+    - backbone_alignment_fail
+    - deprecated_path_created
+  warn:
+    - diagram_applicability_gap
+    - l2_visual_coverage_gap
+    - non_blocking_wording_drift
+  info:
+    - optimization_hint
+
+deprecated_paths:
+  - "/user-stories.md"
+  - "/user-stories-index.md"
+  - "/srs-index.md"
+  - "/screens/"
+  - "/data/erd.md"
+  - "/flows/"
+  - "/srs-groups/"
+
+commands:
+  srs:
+    read:
+      - backbone_index
+      - userstories_index
+      - design_doc
+      - shared_shell_contract
+      - shared_shell_index
+    write:
+      - userstories_root
+      - usecases_root
+      - ascii_screen_root
+      - srs_root
+      - srs
+      - srs_compile_receipt
+      - screen_field_contract
+    forbidden_write:
+      - unrelated_module_root
+      - design_doc
+      - shared_shell_contract_without_system_approval
+      - user-stories.md
+      - user-stories-index.md
+      - srs-index.md
+      - screens/
+      - data/
+      - flows/
+      - srs-groups/
+    pre_checks:
+      - check_backbone_module_alignment
+    post_checks:
+      - check_usecases_index
+      - check_ascii_screen_index
+      - check_partial_srs_compile_receipt
+
+  figma-sync:
+    read:
+      - ascii_screen_index
+      - ascii_screen_root
+      - design_doc
+      - shared_shell_contract
+      - shared_shell_index
+      - shared_definitions
+      - shared_traceability
+    write:
+      - figma_external_state
+      - figma_sync_report
+      - figma_mismatch_report
+    forbidden_write:
+      - srs
+      - ascii_screen_root
+      - usecases_root
+      - userstories_root
+      - shared_shell_contract
+    post_checks:
+      - figma_readback_verification
+
+  package:
+    read:
+      - package_snapshot
+      - backbone_index
+      - userstories_index
+      - usecases_index
+      - ascii_screen_index
+      - srs_compile_receipt
+      - srs
+    write:
+      - compiled_frd
+      - compiled_srs
+      - package_snapshot
+    forbidden_write:
+      - ascii_screen_root
+      - usecases_root
+      - userstories_root
+      - srs_root
+      - shared_shell_contract
+    pre_checks:
+      - check_partial_srs_compile_receipt
+      - check_backbone_module_alignment

@@ -1,0 +1,39 @@
+{
+  "compile_scope": "module",
+  "requested_sections": [
+    "FR",
+    "NFR",
+    "UseCases",
+    "Screens"
+  ],
+  "included_sources": [
+    "srs/spec.md"
+  ],
+  "excluded_sources": [
+    "srs/flows.md",
+    "srs/erd.md"
+  ],
+  "source_hashes": {
+    "srs/spec.md": "32ff19b600f397ff51917793234321b518c3490adf4c3b3768ccf15edc64e6d0",
+    "usecases/index.md": "1124433eb0d8ef07257d664ebf13af97f75bbed57a60d2fd5950ea9999f792fb",
+    "usecases/uc-login.md": "6aa982d47f071dbe9227f56f544e50ac62a28ea5d2f947c4419f05578bcf8424",
+    "ascii-screen/index.md": "c9cb5378e419ff6919f6163affff9e0fe248fdc5d065c550afaae3a303009446",
+    "ascii-screen/scr-01-login.md": "4cb66ccf0cd84d97af017a139869cb2cf2bf58eae74bd877f2a88d3d8dd35ac2"
+  },
+  "cross_function": {
+    "ucs_scanned": 1,
+    "ucs_with_section": 0,
+    "ucs_with_edges": 0,
+    "intra_module_resolved": 0,
+    "inter_module_resolved": 0,
+    "inter_module_pending": 0,
+    "inter_module_mismatch": 0
+  },
+  "template_compliance": true,
+  "html_status": "skipped",
+  "html_path": "",
+  "html_error": "",
+  "navigation_issues": [],
+  "validation_errors": [],
+  "generated_at": "2026-06-08T05:27:22.893580+00:00"
+}

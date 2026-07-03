@@ -1,0 +1,28 @@
+name = "ba-kit-license"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# ── D1 Database ──────────────────────────────────────────────────────
+# After creating the database, replace the placeholder below:
+#   npx wrangler d1 create ba-kit-license
+# Copy the database_id from the output and paste it here.
+[[d1_databases]]
+binding = "DB"
+database_name = "ba-kit-license"
+database_id = "28a7439a-c5d8-423a-b5cc-4511004b6a98"
+
+# ── Env vars ─────────────────────────────────────────────────────────
+# SUPER_ADMIN_TOKEN: set via wrangler secret, NOT here.
+#   openssl rand -hex 32
+#   npx wrangler secret put SUPER_ADMIN_TOKEN
+# Super-admin tokens are also stored in D1 super_admin_tokens table
+# for multi-token support. Secret is fallback bootstrap.
+[vars]
+GITHUB_REPO_OWNER = "bakit-org"
+GITHUB_REPO_NAME = "bakit"
+
+# ── Custom domain ────────────────────────────────────────────────────
+[[routes]]
+pattern = "license.bakit.ai.vn"
+custom_domain = true

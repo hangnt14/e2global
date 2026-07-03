@@ -1,0 +1,10 @@
+{
+  "resolved_command": "ba-start srs",
+  "resolved_slug": "test-project",
+  "source_of_truth_artifact": "backbone",
+  "read_scope": "core/contract.yaml, core/contract-behavior.md, core/behavior/srs.md, plans/test-project-20260424/00_reverse/reverse-baseline-lock.json, plans/test-project-20260424/00_reverse/reverse-evidence-ledger.md, plans/test-project-20260424/00_reverse/reverse-drift-state.json",
+  "write_target": "plans/test-project-20260424/03_modules/auth-flow/srs.md",
+  "approval_gate": "NONE",
+  "activation_level": "Base",
+  "fallback_code": "NONE"
+}

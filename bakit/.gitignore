@@ -1,0 +1,44 @@
+.DS_Store
+.claude/
+.gemini/
+.codex-artifacts/
+!.gemini/settings.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors
+.idea/
+.vscode/
+__pycache__/
+
+# Local scratch files
+extract_pdf.py
+multivendor-ecommerce-requirements.pdf
+
+# Generated artifacts
+dist/
+build/
+coverage/
+tmp/
+temp/
+plans/**
+!plans/
+!plans/README.md
+!plans/reports/
+!plans/reports/.gitkeep
+designs/**/.design-snapshot.md
+designs/**/stitch-state.json
+
+# Local Superpowers planning artifacts
+docs/superpowers/
+
+# BA-kit Central License Server (proprietary infra, not distributed)
+/server/.wrangler/
+
+# Local dev state
+.wrangler/
+data/lme.db*

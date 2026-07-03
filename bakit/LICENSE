@@ -1,0 +1,105 @@
+BA-kit Commercial License v1.0
+
+Copyright (c) 2026 Anh Dam. All rights reserved.
+
+This license governs use of BA-kit and all associated source code, templates,
+documentation, prompt assets, workflow definitions, and related repository
+content (collectively, the "Software").
+
+1. Grant of License
+
+Subject to continuous compliance with this license and any applicable order
+form, invoice, master services agreement, or other commercial agreement with
+the licensor, the licensor grants Licensee a limited, non-exclusive,
+non-transferable, non-sublicensable license to:
+
+- access the Software in a private repository;
+- download, clone, and maintain private internal copies of the Software;
+- create private internal forks of the Software; and
+- modify the Software solely for Licensee's own internal business use.
+
+2. Licensee Scope
+
+"Licensee" means the single legal entity that purchased or was granted access
+to the Software by the licensor.
+
+This license does not extend to any parent company, subsidiary, affiliate,
+contractor, consultant, outsourcing vendor, client, customer, or other third
+party of Licensee unless the licensor has expressly granted that right in a
+separate written agreement.
+
+3. Permitted Internal Use
+
+Licensee may use the Software only for its own internal business analysis,
+documentation, workflow, and operational purposes.
+
+Licensee may privately customize the Software and create derivative works for
+its own internal use, provided that all such derivative works remain subject to
+this license and are not shared outside Licensee.
+
+4. Restrictions
+
+Licensee must not, and must not permit any third party to:
+
+- redistribute, publish, disclose, transmit, or otherwise make the Software
+  available to any third party;
+- provide access to the Software in any public repository, public package,
+  public mirror, public gist, or similar public location;
+- sell, resell, sublicense, lease, rent, assign, transfer, outsource, or
+  commercially exploit the Software as a toolkit, template pack, framework, or
+  competing product;
+- white-label, OEM, or repackage the Software for use by any third party;
+- use substantial portions of the Software to create or market a competing
+  commercial kit, playbook, or repository product; or
+- remove copyright or proprietary notices from the Software.
+
+5. Ownership
+
+The Software is licensed, not sold. The licensor retains all right, title, and
+interest in and to the Software, including all intellectual property rights.
+
+Licensee retains ownership of its own business data and standalone deliverables
+that it creates using the Software, but gains no ownership rights in the
+Software itself or in the licensor's underlying frameworks, templates, prompt
+assets, or workflow structure.
+
+6. Confidentiality
+
+The Software and all non-public repository contents are confidential and
+proprietary information of the licensor. Licensee must protect the Software
+using at least reasonable care and must not disclose it to any unauthorized
+party.
+
+7. Termination
+
+This license terminates automatically if Licensee breaches any material term of
+this license. Upon termination, Licensee must immediately stop using the
+Software and delete or destroy all copies of the Software in its possession or
+control, except where retention is required by law.
+
+8. No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF ANY
+KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING ANY IMPLIED
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND
+NON-INFRINGEMENT.
+
+9. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE LICENSOR WILL NOT BE LIABLE FOR ANY
+INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES,
+OR FOR ANY LOSS OF PROFITS, REVENUE, DATA, GOODWILL, OR BUSINESS INTERRUPTION,
+ARISING OUT OF OR RELATING TO THE SOFTWARE OR THIS LICENSE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGES.
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE LICENSOR'S TOTAL LIABILITY ARISING
+OUT OF OR RELATING TO THE SOFTWARE OR THIS LICENSE WILL NOT EXCEED THE AMOUNT
+PAID BY LICENSEE FOR THE SOFTWARE DURING THE TWELVE (12) MONTHS IMMEDIATELY
+PRECEDING THE EVENT GIVING RISE TO THE CLAIM.
+
+10. Order of Precedence
+
+If Licensee and the licensor have entered into a separate written commercial
+agreement for the Software, that agreement controls only to the extent of any
+direct conflict with this license. Otherwise, this license governs use of the
+Software.

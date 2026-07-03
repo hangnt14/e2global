@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đặc tả yêu cầu phần mềm (Software Requirements Specification)</title>
+<style>
+:root {
+    --primary: #1a1a2e;
+    --accent: #0f3460;
+    --accent-soft: #d9edf7;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --border: #e0e0e0;
+    --code-bg: #f5f5f5;
+    --toolbar-bg: rgba(255, 255, 255, 0.96);
+    --danger: #b42318;
+    --success: #0f7b6c;
+    --hero-bg: linear-gradient(135deg, rgba(15, 52, 96, 0.08), rgba(217, 237, 247, 0.65));
+    --muted: #52627a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6; color: var(--text); background: #f5f7fb;
+    margin: 0; padding: 0;
+}
+body[data-doc-type="intake"] {
+    --primary: #134e4a;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --hero-bg: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(204, 251, 241, 0.72));
+}
+body[data-doc-type="frd"] {
+    --primary: #1e3a8a;
+    --accent: #1d4ed8;
+    --accent-soft: #dbeafe;
+    --hero-bg: linear-gradient(135deg, rgba(29, 78, 216, 0.12), rgba(219, 234, 254, 0.74));
+}
+body[data-doc-type="stories"] {
+    --primary: #78350f;
+    --accent: #b45309;
+    --accent-soft: #fef3c7;
+    --hero-bg: linear-gradient(135deg, rgba(180, 83, 9, 0.12), rgba(254, 243, 199, 0.78));
+}
+body[data-doc-type="srs"] {
+    --primary: #115e59;
+    --accent: #0f766e;
+    --accent-soft: #d1fae5;
+    --hero-bg: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(209, 250, 229, 0.75));
+}
+.editor-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 20px 48px;
+}
+.document-chrome {
+    margin-bottom: 20px;
+}
+.doc-kicker {
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+.doc-hero {
+    display: grid;
+    gap: 18px;
+    padding: 24px;
+    border: 1px solid rgba(15, 52, 96, 0.12);
+    border-radius: 24px;
+    background: var(--hero-bg);
+    box-shadow: 0 16px 36px rgba(15, 52, 96, 0.06);
+}
+.doc-hero__content {
+    display: grid;
+    gap: 12px;
+}
+.doc-type-badge {
+    display: inline-flex;
+    width: fit-content;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(15, 52, 96, 0.12);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.doc-hero__title {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: var(--primary);
+}
+.doc-hero__summary {
+    margin: 0;
+    max-width: 70ch;
+    color: var(--muted);
+    font-size: 1rem;
+}
+.doc-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+.doc-meta-card {
+    min-width: 0;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(15, 52, 96, 0.1);
+    background: rgba(255, 255, 255, 0.82);
+}
+.doc-meta-card dt {
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+}
+.doc-meta-card dd {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+.editor-toolbar {
+    position: sticky;
+    top: 12px;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    background: var(--toolbar-bg);
+    border: 1px solid rgba(15, 52, 96, 0.14);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(15, 52, 96, 0.08);
+    backdrop-filter: blur(12px);
+}
+.editor-toolbar__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.editor-toolbar__status {
+    margin-left: auto;
+    font-size: 0.92rem;
+    color: #42526b;
+}
+.editor-button {
+    appearance: none;
+    border: 1px solid rgba(15, 52, 96, 0.16);
+    background: #fff;
+    color: var(--accent);
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.editor-button:hover {
+    background: #f0f6ff;
+}
+.editor-button.is-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.editor-button.is-danger {
+    color: var(--danger);
+    border-color: rgba(180, 35, 24, 0.18);
+}
+.editor-help {
+    width: 100%;
+    font-size: 0.88rem;
+    color: #52627a;
+}
+.document-surface {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: var(--bg);
+    border: 1px solid rgba(15, 52, 96, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(15, 52, 96, 0.08);
+}
+h1 { font-size: 2em; color: var(--primary); margin: 1.5em 0 0.5em; border-bottom: 2px solid var(--accent); padding-bottom: 0.3em; }
+h2 { font-size: 1.5em; color: var(--accent); margin: 1.2em 0 0.4em; }
+h3 { font-size: 1.2em; margin: 1em 0 0.3em; }
+h4,h5,h6 { margin: 0.8em 0 0.2em; }
+p { margin: 0.5em 0; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; }
+th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+th { background: var(--accent); color: white; font-weight: 600; }
+tr:nth-child(even) { background: #f9f9f9; }
+pre { background: var(--code-bg); padding: 16px; border-radius: 6px; overflow-x: auto; margin: 1em 0; }
+code { font-family: 'SF Mono', Consolas, monospace; font-size: 0.9em; }
+blockquote { border-left: 4px solid var(--accent); padding: 0.5em 1em; margin: 1em 0; background: #f0f4ff; font-style: italic; }
+ul, ol { margin: 0.5em 0 0.5em 1.5em; }
+li { margin: 0.2em 0; }
+pre.mermaid,
+.mermaid {
+    padding: 20px;
+    border: 1px solid rgba(15, 52, 96, 0.1);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(255, 255, 255, 1));
+    overflow-x: auto;
+}
+.mermaid svg {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    margin: 0 auto;
+}
+.mermaid-render-error {
+    color: #92400e;
+    background: #fffbeb;
+    border-color: rgba(146, 64, 14, 0.24);
+}
+.plantuml-diagram {
+    margin: 1em 0;
+    padding: 20px;
+    border: 1px solid rgba(15, 52, 96, 0.1);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(255, 255, 255, 1));
+    overflow-x: auto;
+}
+.plantuml-diagram--inline svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.plantuml-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.plantuml-render-warning {
+    margin: 0 0 12px;
+    color: #92400e;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.plantuml-render-error {
+    color: #92400e;
+    background: #fffbeb;
+    border: 1px solid rgba(146, 64, 14, 0.24);
+    border-radius: 14px;
+}
+img.wireframe {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(100%, 760px);
+    max-height: min(68vh, 960px);
+    margin: 1.25em auto;
+    padding: 12px;
+    object-fit: contain;
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    cursor: zoom-in;
+}
+.missing-image,
+.blocked-image { color: #d32f2f; font-style: italic; padding: 1em; background: #fff3f3; border: 1px dashed #d32f2f; border-radius: 4px; }
+.toc { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 1.5em; margin-bottom: 2em; }
+.toc h2 { margin-top: 0; font-size: 1.2em; }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { margin: 0.3em 0; }
+.toc .toc-1 { font-weight: 600; }
+.toc .toc-2 { padding-left: 1.5em; }
+.toc .toc-3 { padding-left: 3em; font-size: 0.9em; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.page-break { page-break-before: always; }
+.editable-block {
+    position: relative;
+    transition: outline-color 0.15s ease, box-shadow 0.15s ease;
+}
+.editing-active .editable-block:hover {
+    outline: 2px dashed rgba(15, 52, 96, 0.24);
+    outline-offset: 6px;
+}
+.editable-selected {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    box-shadow: 0 0 0 6px rgba(15, 52, 96, 0.08);
+}
+.editing-active [contenteditable="true"] {
+    cursor: text;
+}
+.editing-active [contenteditable="true"]:focus {
+    outline: 2px solid rgba(15, 52, 96, 0.24);
+    border-radius: 6px;
+    background: rgba(217, 237, 247, 0.22);
+}
+.editing-active img.wireframe {
+    cursor: pointer;
+}
+.editor-hidden {
+    display: none !important;
+}
+.wireframe-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1600;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.74);
+    backdrop-filter: blur(8px);
+}
+.wireframe-lightbox.is-open {
+    display: flex;
+}
+.wireframe-lightbox__dialog {
+    position: relative;
+    display: grid;
+    gap: 12px;
+    width: min(96vw, 1440px);
+    max-height: 94vh;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+}
+.wireframe-lightbox__image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: calc(94vh - 96px);
+    margin: 0 auto;
+    object-fit: contain;
+}
+.wireframe-lightbox__caption {
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-align: center;
+}
+.wireframe-lightbox__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+@media print {
+    body { background: #fff; }
+    .editor-shell { max-width: none; padding: 0; }
+    .document-chrome { margin-bottom: 18px; }
+    .doc-hero { padding: 20px; box-shadow: none; }
+    .document-surface { max-width: none; padding: 0; border: none; border-radius: 0; box-shadow: none; }
+    .editor-toolbar { display: none !important; }
+    .wireframe-lightbox { display: none !important; }
+    .toc { page-break-after: always; }
+    .page-break { page-break-before: always; }
+    table { page-break-inside: avoid; }
+    img.wireframe { page-break-inside: avoid; max-width: 100%; max-height: 80vh; }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+</head>
+<body data-doc-type="generic">
+<div class="editor-shell">
+  <section class="document-chrome">
+    <div class="doc-kicker">BA-kit — Tài liệu bàn giao</div>
+    <div class="doc-hero">
+      <div class="doc-hero__content">
+        <div class="doc-type-badge">Tài liệu BA-kit</div>
+        <h1 class="doc-hero__title">Đặc tả yêu cầu phần mềm (Software Requirements Specification)</h1>
+        <p class="doc-hero__summary">Tài liệu BA được đóng gói trong khung HTML dùng chung của BA-kit.</p>
+      </div>
+      <dl class="doc-meta-grid">
+      <div class="doc-meta-card"><dt>Loại tài liệu</dt><dd>Tài liệu phân tích nghiệp vụ</dd></div>
+      <div class="doc-meta-card"><dt>Tệp markdown gốc</dt><dd>/Users/damtuana/Projects/BA-kit-allrepos/BA-kit/fixtures/greenfield-new-artifact-architecture/plans/example-260528-1000/03_modules/auth/srs.md</dd></div>
+      <div class="doc-meta-card"><dt>Thời điểm tạo</dt><dd>2026-06-08 11:50 +07</dd></div>
+      </dl>
+    </div>
+  </section>
+  <main id="document-surface" class="document-surface">
+<nav class="toc"><h2>Table of Contents</h2>
+<ul>
+<li class="toc-1"><a href="#c-t-y-u-c-u-ph-n-m-m-software-requirements-specification">Đặc tả yêu cầu phần mềm (Software Requirements Specification)</a></li>
+  <li class="toc-2"><a href="#t-m-t-t-d-nh-cho-ba-v-stakeholder">Tóm tắt dành cho BA và stakeholder</a></li>
+  <li class="toc-2"><a href="#m-c-ch-v-ph-m-vi-purpose-and-scope">Mục đích và phạm vi (Purpose and Scope)</a></li>
+  <li class="toc-2"><a href="#m-t-t-ng-quan-overall-description">Mô tả tổng quan (Overall Description)</a></li>
+  <li class="toc-2"><a href="#ki-n-tr-c-h-th-ng-i-u-h-ng-information-architecture">Kiến trúc hệ thống &amp; Điều hướng (Information Architecture)</a></li>
+    <li class="toc-3"><a href="#ma-tr-n-portal-portal-matrix">Ma trận portal (Portal Matrix)</a></li>
+    <li class="toc-3"><a href="#navigation-schema">Navigation Schema</a></li>
+  <li class="toc-2"><a href="#y-u-c-u-ch-c-n-ng-functional-requirements">Yêu cầu chức năng (Functional Requirements)</a></li>
+  <li class="toc-2"><a href="#c-t-use-case-use-case-specifications">Đặc tả Use Case (Use Case Specifications)</a></li>
+    <li class="toc-3"><a href="#use-case-chi-ti-t-detailed-use-case">Use Case chi tiết (Detailed Use Case)</a></li>
+  <li class="toc-2"><a href="#h-p-ng-m-n-h-nh-ti-n-wireframe-screen-contract-plus">Hợp đồng màn hình tiền wireframe (Screen Contract Plus)</a></li>
+  <li class="toc-2"><a href="#danh-m-c-m-n-h-nh-screen-inventory">Danh mục màn hình (Screen Inventory)</a></li>
+  <li class="toc-2"><a href="#m-t-m-n-h-nh-screen-descriptions">Mô tả màn hình (Screen Descriptions)</a></li>
+<li class="toc-1"><a href="#scr-01-login-screen">SCR-01: Login Screen</a></li>
+  <li class="toc-2"><a href="#overview">Overview</a></li>
+  <li class="toc-2"><a href="#fields">Fields</a></li>
+  <li class="toc-2"><a href="#user-actions">User Actions</a></li>
+  <li class="toc-2"><a href="#states">States</a></li>
+  <li class="toc-2"><a href="#ascii-wireframe">ASCII Wireframe</a></li>
+    <li class="toc-3"><a href="#default-state">Default State</a></li>
+    <li class="toc-3"><a href="#error-state">Error State</a></li>
+  <li class="toc-2"><a href="#tham-chi-u-wireframe-mockup-th-c-ng-manual-wireframe-mockup-reference">Tham chiếu Wireframe / Mockup thủ công (Manual Wireframe / Mockup Reference)</a></li>
+  <li class="toc-2"><a href="#thi-t-k-m-n-h-nh-screen-design-intent">Ý đồ thiết kế màn hình (Screen Design Intent)</a></li>
+  <li class="toc-2"><a href="#v-ng-m-n-h-nh-screen-regions">Vùng màn hình (Screen Regions)</a></li>
+  <li class="toc-2"><a href="#tham-chi-u-quy-t-c-th-ng-i-p-d-ng-chung-shared-rule-message-references">Tham chiếu quy tắc/thông điệp dùng chung (Shared Rule/Message References)</a></li>
+  <li class="toc-2"><a href="#ascii-wireframes">ASCII Wireframes</a></li>
+  <li class="toc-2"><a href="#y-u-c-u-phi-ch-c-n-ng-non-functional-requirements">Yêu cầu phi chức năng (Non-Functional Requirements)</a></li>
+  <li class="toc-2"><a href="#s-lu-ng-d-li-u-data-flow-diagrams">Sơ đồ luồng dữ liệu (Data Flow Diagrams)</a></li>
+  <li class="toc-2"><a href="#s-th-c-th-quan-h-entity-relationship-diagram">Sơ đồ thực thể quan hệ (Entity Relationship Diagram)</a></li>
+  <li class="toc-2"><a href="#c-t-api-api-specifications">Đặc tả API (API Specifications)</a></li>
+  <li class="toc-2"><a href="#r-ng-bu-c-constraints">Ràng buộc (Constraints)</a></li>
+  <li class="toc-2"><a href="#k-ch-b-n-ki-m-th-test-cases">Kịch bản kiểm thử (Test Cases)</a></li>
+  <li class="toc-2"><a href="#b-ng-thu-t-ng-glossary">Bảng thuật ngữ (Glossary)</a></li>
+  <li class="toc-2"><a href="#t-i-li-u-li-n-quan-related-templates">Tài liệu liên quan (Related Templates)</a></li>
+</ul>
+</nav>
+<blockquote><strong>Tài liệu tổng hợp:</strong> Compile tự động từ canon sources lúc 2026-06-08 04:50:18 UTC.</blockquote>
+<blockquote>Module: auth | Slug: example | Date: 260528-1000</blockquote>
+<blockquote>Sources: srs/spec.md, usecases, ascii-screen</blockquote>
+
+<h1 id="c-t-y-u-c-u-ph-n-m-m-software-requirements-specification">Đặc tả yêu cầu phần mềm (Software Requirements Specification)</h1>
+
+<blockquote><strong>Tài liệu tổng hợp:</strong> Tài liệu này là bản SRS đọc/handoff cho stakeholder. Khi dự án dùng tài liệu nguồn chuẩn, nguồn chỉnh sửa chính nằm ở <code>usecases/<em>.md</code>, <code>ascii-screen/</em>.md</code>, <code>srs/spec.md</code>, <code>srs/flows.md</code>, <code>srs/states.md</code>, và <code>srs/erd.md</code>; sau đó tổng hợp lại vào <code>srs.md</code>. ASCII wireframe bắt buộc nằm trong từng <code>ascii-screen/*.md</code> và được tổng hợp vào đây. Không chỉnh trực tiếp <code>srs.md</code> trừ khi có manual override và backport vào tài liệu nguồn chuẩn.</blockquote>
+
+<div class="page-break"></div>
+<h2 id="t-m-t-t-d-nh-cho-ba-v-stakeholder">Tóm tắt dành cho BA và stakeholder</h2>
+
+<blockquote>Phần này được tổng hợp tự động khi chạy <code>ba-start srs</code>. Không chỉnh sửa trực tiếp vì nội dung được lấy từ tài liệu nguồn chuẩn.</blockquote>
+
+<p><strong>Dự án (Project):</strong> [Tên dự án]</p>
+<p><strong>Phiên bản (Version):</strong> [v1.0]</p>
+<p><strong>Chủ sở hữu (Owner):</strong> [BA/technical owner]</p>
+<p><strong>Ngày (Date):</strong> [YYYY-MM-DD]</p>
+
+<div class="page-break"></div>
+<h2 id="m-c-ch-v-ph-m-vi-purpose-and-scope">Mục đích và phạm vi (Purpose and Scope)</h2>
+<p>Nêu phạm vi phần mềm, ranh giới hệ thống, và đối tượng đọc.</p>
+
+<div class="page-break"></div>
+<h2 id="m-t-t-ng-quan-overall-description">Mô tả tổng quan (Overall Description)</h2>
+<ul>
+<li>Góc nhìn sản phẩm:</li>
+<li>Nhóm người dùng:</li>
+<li>Môi trường vận hành:</li>
+<li>Giả định và phụ thuộc:</li>
+</ul>
+
+<div class="page-break"></div>
+<h2 id="ki-n-tr-c-h-th-ng-i-u-h-ng-information-architecture">Kiến trúc hệ thống &amp; Điều hướng (Information Architecture)</h2>
+<p>Liệt kê các Portal/App trong hệ thống, đối tượng mục tiêu, và cấu trúc Menu (Sitemap) tương ứng để đảm bảo sự nhất quán trong thiết kế UI/UX và phân quyền.</p>
+
+<h3 id="ma-tr-n-portal-portal-matrix">Ma trận portal (Portal Matrix)</h3>
+
+<table>
+<thead>
+<tr><th>Portal ID</th><th>Portal / App</th><th>Đối tượng mục tiêu (Target Actor)</th><th>Access Scope</th><th>Owned Screen Families / Route Groups</th><th>Default Entry Context</th></tr>
+</thead>
+<tbody>
+<tr><td>[PORTAL-ADMIN]</td><td>[Admin Portal]</td><td>[System Admin]</td><td>[Full admin]</td><td>[Dashboard, User Management, Settings]</td><td>[Sau login vào Dashboard]</td></tr>
+</tbody>
+</table>
+
+<h3 id="navigation-schema">Navigation Schema</h3>
+
+<table>
+<thead>
+<tr><th>Portal ID</th><th>Nav Schema ID</th><th>Menu chính (Sitemap)</th><th>Pattern điều hướng</th><th>Default Landing</th><th>Active / Selected Rule</th><th>Breadcrumb / Back Rule</th><th>Hidden / Contextual Nav Exceptions</th></tr>
+</thead>
+<tbody>
+<tr><td>[PORTAL-ADMIN]</td><td>[NAV-ADMIN-01]</td><td>- Dashboard&lt;br&gt;- Quản lý người dùng&lt;br&gt;- Cài đặt</td><td>[Sidebar]</td><td>[Dashboard]</td><td>[Highlight item theo route group]</td><td>[Breadcrumb từ cấp 2 trở xuống]</td><td>[Modal xác nhận không render menu]</td></tr>
+<tr><td>[PORTAL-CUSTOMER]</td><td>[NAV-CUSTOMER-01]</td><td>- Home&lt;br&gt;- Đơn hàng&lt;br&gt;- Tài khoản</td><td>[Bottom tabs]</td><td>[Home]</td><td>[Bottom tab active theo tab hiện tại]</td><td>[Back theo native/browser history]</td><td>[Checkout step có thể ẩn tabs]</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="y-u-c-u-ch-c-n-ng-functional-requirements">Yêu cầu chức năng (Functional Requirements)</h2>
+<table>
+<thead>
+<tr><th>Mã (ID)</th><th>Yêu cầu (Requirement)</th><th>Ưu tiên (Priority)</th><th>Nguồn (Source)</th><th>Tiêu chí chấp nhận (Acceptance Criteria)</th></tr>
+</thead>
+<tbody>
+<tr><td>FR-auth-001</td><td>User login với email/password</td><td>Must</td><td>Backbone</td><td>Login thành công trong 3 lần thử</td></tr>
+<tr><td>FR-auth-002</td><td>Hiển thị thông báo lỗi khi sai password</td><td>Must</td><td>Backbone</td><td>Hiển thị &quot;Sai mật khẩu&quot; sau lần thử thứ 3</td></tr>
+</tbody>
+</table>
+<div class="page-break"></div>
+<h2 id="c-t-use-case-use-case-specifications">Đặc tả Use Case (Use Case Specifications)</h2>
+<p>Mô tả các tương tác chính của hệ thống theo định dạng actor-goal. Mỗi dòng một use case, sau đó mở rộng các use case quan trọng bên dưới.</p>
+
+<table>
+<thead>
+<tr><th>Mã UC (Use Case ID)</th><th>Tên UC (Use Case Name)</th><th>Tác nhân chính (Primary Actor)</th><th>Trigger</th><th>Điều kiện tiên quyết (Precondition)</th><th>Hậu điều kiện (Postcondition)</th></tr>
+</thead>
+<tbody>
+<tr><td>UC-01</td><td>[Use case]</td><td>[Tác nhân]</td><td>[Trigger]</td><td>[Điều kiện tiên quyết]</td><td>[Hậu điều kiện]</td></tr>
+</tbody>
+</table>
+
+<h3 id="use-case-chi-ti-t-detailed-use-case">Use Case chi tiết (Detailed Use Case)</h3>
+<p><strong>Mã UC (Use Case ID):</strong> [UC-01]</p>
+<p><strong>Mục tiêu (Goal):</strong> [Tác nhân đạt được gì]</p>
+<p><strong>Tác nhân chính (Primary Actor):</strong> [Tác nhân]</p>
+<p><strong>Tác nhân/Hệ thống hỗ trợ (Supporting Actors/Systems):</strong> [Tùy chọn]</p>
+<p><strong>Điều kiện tiên quyết (Preconditions):</strong> [Điều kiện phải đúng trước đó]</p>
+<p><strong>Hậu điều kiện (Postconditions):</strong> [Điều kiện đúng sau khi hoàn tất]</p>
+<p><strong>User Stories liên kết (Linked User Stories):</strong> [US-001, US-002]</p>
+
+<table>
+<thead>
+<tr><th>Bước (Step)</th><th>Hành động tác nhân (Actor Action)</th><th>Phản hồi hệ thống (System Response)</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>[Hành động]</td><td>[Phản hồi]</td></tr>
+</tbody>
+</table>
+
+<p><strong>Luồng thay thế (Alternate Flows)</strong></p>
+<ul>
+<li>[Biến thể hoặc ngoại lệ]</li>
+</ul>
+
+<p><strong>Quy tắc nghiệp vụ (Business Rules)</strong></p>
+<ul>
+<li>[Tham chiếu quy tắc]</li>
+</ul>
+
+<p><strong>Sơ đồ luồng (Process Flow / Sequence Diagram)</strong></p>
+<p>Yêu cầu bắt buộc phải có sơ đồ luồng có swimlane bằng PlantUML hoặc Sơ đồ trình tự (Sequence Diagram) bằng Mermaid cho Use Case này. Thể hiện rõ các tương tác giữa tác nhân và hệ thống, cũng như các rẽ nhánh luồng thay thế.</p>
+
+<figure class="plantuml-diagram plantuml-diagram--inline"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" data-diagram-type="ACTIVITY" height="352px" preserveAspectRatio="none" style="width:544px;height:352px;background:#FFFFFF;" version="1.1" viewBox="0 0 544 352" width="544px" zoomAndPan="magnify"><?plantuml 1.2026.5?><defs/><g><rect fill="none" height="21.1992" style="stroke:none;stroke-width:1;" width="497.8008" x="20" y="17.2969"/><ellipse cx="98.2705" cy="53.4961" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"/><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="144.541" x="26" y="83.4961"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="124.541" x="36" y="105.0977">Th&#7921;c hi&#7879;n h&#224;nh &#273;&#7897;ng</text><line style="stroke:#000000;stroke-width:1.5;" x1="20" x2="20" y1="17.2969" y2="331.8945"/><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="127.4844" x="282.6675" y="137.6289"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="107.4844" x="292.6675" y="159.2305">Ti&#7871;p nh&#7853;n v&#224; x&#7917; l&#253;</text><polygon fill="#F1F1F1" points="300.1592,191.7617,392.6602,191.7617,404.6602,203.7617,392.6602,215.7617,300.1592,215.7617,288.1592,203.7617,300.1592,191.7617" style="stroke:#181818;stroke-width:0.5;stroke-linejoin:miter;stroke-miterlimit:10;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92.501" x="300.1592" y="207.9189">&#272;i&#7873;u ki&#7879;n h&#7907;p l&#7879;?</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="14.3677" x="273.7915" y="201.4414">C&#243;</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34.4502" x="404.6602" y="201.4414">Kh&#244;ng</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="156.0313" x="180.541" y="225.7617"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="136.0313" x="190.541" y="247.3633">Tr&#7843; k&#7871;t qu&#7843; th&#224;nh c&#244;ng</text><rect fill="#F1F1F1" height="34.1328" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="155.3809" x="356.5723" y="225.7617"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="135.3809" x="366.5723" y="247.3633">Tr&#7843; l&#7895;i / lu&#7891;ng thay th&#7871;</text><polygon fill="#F1F1F1" points="346.4097,265.8945,358.4097,277.8945,346.4097,289.8945,334.4097,277.8945,346.4097,265.8945" style="stroke:#181818;stroke-width:0.5;stroke-linejoin:miter;stroke-miterlimit:10;"/><ellipse cx="346.4097" cy="320.8945" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"/><ellipse cx="346.4097" cy="320.8945" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"/><line style="stroke:#000000;stroke-width:1.5;" x1="174.541" x2="174.541" y1="17.2969" y2="331.8945"/><line style="stroke:#000000;stroke-width:1.5;" x1="515.9531" x2="515.9531" y1="17.2969" y2="331.8945"/><line style="stroke:#181818;stroke-width:1;" x1="98.2705" x2="98.2705" y1="63.4961" y2="83.4961"/><polygon fill="#181818" points="94.2705,73.4961,98.2705,83.4961,102.2705,73.4961,98.2705,77.4961" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="288.1592" x2="258.5566" y1="203.7617" y2="203.7617"/><line style="stroke:#181818;stroke-width:1;" x1="258.5566" x2="258.5566" y1="203.7617" y2="225.7617"/><polygon fill="#181818" points="254.5566,215.7617,258.5566,225.7617,262.5566,215.7617,258.5566,219.7617" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="404.6602" x2="434.2627" y1="203.7617" y2="203.7617"/><line style="stroke:#181818;stroke-width:1;" x1="434.2627" x2="434.2627" y1="203.7617" y2="225.7617"/><polygon fill="#181818" points="430.2627,215.7617,434.2627,225.7617,438.2627,215.7617,434.2627,219.7617" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="258.5566" x2="258.5566" y1="259.8945" y2="277.8945"/><line style="stroke:#181818;stroke-width:1;" x1="258.5566" x2="334.4097" y1="277.8945" y2="277.8945"/><polygon fill="#181818" points="324.4097,273.8945,334.4097,277.8945,324.4097,281.8945,328.4097,277.8945" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="434.2627" x2="434.2627" y1="259.8945" y2="277.8945"/><line style="stroke:#181818;stroke-width:1;" x1="434.2627" x2="358.4097" y1="277.8945" y2="277.8945"/><polygon fill="#181818" points="368.4097,273.8945,358.4097,277.8945,368.4097,281.8945,364.4097,277.8945" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="346.4097" x2="346.4097" y1="171.7617" y2="191.7617"/><polygon fill="#181818" points="342.4097,181.7617,346.4097,191.7617,350.4097,181.7617,346.4097,185.7617" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="346.4097" x2="346.4097" y1="289.8945" y2="309.8945"/><polygon fill="#181818" points="342.4097,299.8945,346.4097,309.8945,350.4097,299.8945,346.4097,303.8945" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><line style="stroke:#181818;stroke-width:1;" x1="98.2705" x2="98.2705" y1="117.6289" y2="122.6289"/><line style="stroke:#181818;stroke-width:1;" x1="98.2705" x2="346.4097" y1="122.6289" y2="122.6289"/><line style="stroke:#181818;stroke-width:1;" x1="346.4097" x2="346.4097" y1="122.6289" y2="137.6289"/><polygon fill="#181818" points="342.4097,127.6289,346.4097,137.6289,350.4097,127.6289,346.4097,131.6289" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="104.6074" x="44.9668" y="34.6992">Ng&#432;&#7901;i d&#249;ng</text><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="80.3057" x="305.0942" y="34.6992">H&#7879; th&#7889;ng</text><?plantuml-src JO-nQW9148RxVOg_FAlqPs6HHX1ItGk8dhVB7UD5zoI1QwnibHGXXI1SVM186cy9LwpaFUPDd2KMwVuPvljcfdxAVi_iZWPpVw6iLcixNLaL9vhTvmpQiDiHj3-HnlN0xeEoeQh7qeMLaKD0uiHmrvSWpLrBsFWJNjYrAFpFK9a5ekjUDDiA-Tt6hYbHI1uDn98IeaV_DL10dAouQv2BpkAv2jd-xPxvxx0vBTOfeeaErJz0NEy63oWgTc-K2JHz3VTrlI0qDmjvQrdU0000?></g></svg></figure>
+
+<p><strong>Màn hình liên kết (Linked Screen):</strong> [SCR-01 — Tên màn hình]</p>
+
+<p><strong>Ghi chú chấp nhận (Acceptance Notes)</strong></p>
+<ul>
+<li>[Điều cần kiểm tra]</li>
+</ul>
+
+<blockquote><strong>Quy tắc nhất quán:</strong> Hành động tác nhân trong use case này phải khớp với User Actions của màn hình tương ứng. Phản hồi hệ thống phải khớp với Behaviour Rules của các trường trên màn hình. Nếu use case nói &quot;hệ thống kiểm tra định dạng email&quot;, trường email trên màn hình liên kết phải có Validation Rule tương ứng.</blockquote>
+
+<div class="page-break"></div>
+<h2 id="h-p-ng-m-n-h-nh-ti-n-wireframe-screen-contract-plus">Hợp đồng màn hình tiền wireframe (Screen Contract Plus)</h2>
+<p>Ghi nhận screen spec đủ mạnh để chuẩn bị constraint wireframe trước khi viết mô tả màn hình chi tiết. Phần này khóa portal ownership và menu behavior; Group E chỉ được enrich thêm, không được tái định nghĩa.</p>
+
+<table>
+<thead>
+<tr><th>Mã (Screen ID)</th><th>Tên (Screen Name)</th><th>Phân loại (Classification)</th><th>Màn hình cha (Parent Screen)</th><th>Portal ID</th><th>Access Role / Actor</th><th>Nav Schema ID</th><th>Expected Active Menu Item</th><th>Navigation Region Visible</th><th>Breadcrumb / Back Behavior</th><th>Global vs Local Navigation</th><th>UC liên kết (Linked Use Cases)</th><th>Vào / Ra (Entry / Exit)</th><th>Hành động chính (Key Actions)</th><th>Trạng thái bắt buộc (Required States)</th><th>Mức tài liệu (Documentation Level)</th></tr>
+</thead>
+<tbody>
+<tr><td>SCR-01</td><td>[Màn hình]</td><td>Primary screen</td><td>[N/A]</td><td>[PORTAL-CSR]</td><td>[CSR]</td><td>[NAV-CSR-01]</td><td>[Tickets]</td><td>[Yes]</td><td>[Breadcrumb + browser back]</td><td>[Global top bar + local tabs]</td><td>[UC-01, UC-02]</td><td>[Vào / Ra]</td><td>[Submit, Cancel]</td><td>[Loading, Empty, Error, Success]</td><td>Detailed</td></tr>
+<tr><td>SCR-02</td><td>[Modal / Drawer / Dialog]</td><td>Primary screen</td><td>[SCR-01]</td><td>[PORTAL-CSR]</td><td>[CSR]</td><td>[NAV-CSR-01]</td><td>[Tickets]</td><td>[No]</td><td>[Close quay về SCR-01]</td><td>[Local overlay only]</td><td>[UC-03]</td><td>[Mở từ SCR-01 / trở về SCR-01]</td><td>[Confirm, Close]</td><td>[Default, Loading, Error]</td><td>Detailed</td></tr>
+</tbody>
+</table>
+
+<blockquote>Phần này là hợp đồng đầu vào cho bộ constraint wireframe. Đủ để user hoặc designer bên ngoài tự dựng wireframe/mockup trước hoặc sau khi mô tả màn hình chi tiết được mở rộng.</blockquote>
+
+<div class="page-break"></div>
+<h2 id="danh-m-c-m-n-h-nh-screen-inventory">Danh mục màn hình (Screen Inventory)</h2>
+<p>Ghi nhận mọi UI frame hoặc trạng thái cần tồn tại trong phạm vi thiết kế thủ công, bao gồm cả màn hình chính và frame trạng thái hỗ trợ.</p>
+
+<table>
+<thead>
+<tr><th>Mã (Screen/Frame ID)</th><th>Tên (Screen Name)</th><th>Phân loại (Classification)</th><th>Màn hình cha (Parent Screen)</th><th>Mục đích (Purpose)</th><th>Mức tài liệu (Documentation Level)</th></tr>
+</thead>
+<tbody>
+<tr><td>SCR-01</td><td>[Màn hình]</td><td>Primary screen</td><td>[N/A]</td><td>[Mục đích]</td><td>Detailed</td></tr>
+<tr><td>SCR-02</td><td>[Modal / Drawer / Dialog]</td><td>Primary screen</td><td>[SCR-01]</td><td>[Quyết định quan trọng, xác nhận, hoặc bước form ảnh hưởng luồng]</td><td>Detailed</td></tr>
+<tr><td>SCR-01-EMPTY</td><td>[Trạng thái rỗng]</td><td>Supporting state</td><td>[SCR-01]</td><td>[Không có dữ liệu / không có kết quả / hướng dẫn lần đầu]</td><td>Inventory-only</td></tr>
+<tr><td>SCR-01-ERROR</td><td>[Trạng thái lỗi]</td><td>Supporting state</td><td>[SCR-01]</td><td>[Lỗi inline / lỗi chặn / trạng thái thử lại]</td><td>Inventory-only</td></tr>
+<tr><td>SCR-01-TOAST-SUCCESS</td><td>[Toast thành công]</td><td>Supporting feedback</td><td>[SCR-01]</td><td>[Xác nhận thành công sau hành động chính]</td><td>Inventory-only</td></tr>
+</tbody>
+</table>
+
+<blockquote>Mọi modal, dialog, drawer, wizard step, hoặc overlay có display rules, behaviour rules, user actions, hoặc ảnh hưởng luồng riêng đều phải được coi là primary screen và có mục mô tả chi tiết riêng.</blockquote>
+<blockquote>Supporting frames không bắt buộc phải có mục chi tiết đầy đủ trong SRS HTML cuối cùng. Chúng vẫn phải được liệt kê ở đây để đảm bảo truy vết bằng Screen ID và để user biết mình cần tự thiết kế hoặc annotate thêm khi cần.</blockquote>
+
+<div class="page-break"></div>
+<h2 id="m-t-m-n-h-nh-screen-descriptions">Mô tả màn hình (Screen Descriptions)</h2>
+<hr>
+<p>type: screen</p>
+<p>module: auth</p>
+<p>screen_id: SCR-01</p>
+<p>slug: login</p>
+<p>portal_id: PORTAL-WEB</p>
+<p>nav_schema_id: NAV-MAIN</p>
+<p>expected_active_menu: Login</p>
+<p>actor: End User</p>
+<p>ascii_status: current</p>
+<p>status: completed</p>
+<p>linked_usecases: [UC-login]</p>
+<p>linked_stories: [US-001]</p>
+<p>source_backbone_ids: [auth-login]</p>
+<p>created: 2026-05-28</p>
+<p>owner: &quot;@ba&quot;</p>
+<p>changelog:</p>
+<ul>
+<li>2026-05-28 | /srs | initial draft</li>
+</ul>
+<hr>
+
+<div class="page-break"></div>
+<h1 id="scr-01-login-screen">SCR-01: Login Screen</h1>
+
+<div class="page-break"></div>
+<h2 id="overview">Overview</h2>
+
+<table>
+<thead>
+<tr><th>Field</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>Portal ID</td><td>PORTAL-WEB</td></tr>
+<tr><td>Nav Schema ID</td><td>NAV-MAIN</td></tr>
+<tr><td>Expected Active Menu Item</td><td>Login</td></tr>
+<tr><td>Navigation Region Visible</td><td>No</td></tr>
+<tr><td>Entry Conditions</td><td>User is not authenticated</td></tr>
+<tr><td>Exit Conditions</td><td>Login success or cancel</td></tr>
+<tr><td>Actor</td><td>End User</td></tr>
+<tr><td>Linked Use Cases</td><td>UC-login</td></tr>
+<tr><td>Linked Stories</td><td>US-001</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="fields">Fields</h2>
+
+<table>
+<thead>
+<tr><th>Field Name</th><th>Display Rules</th><th>Behaviour Rules</th><th>Validation Rules</th></tr>
+</thead>
+<tbody>
+<tr><td>Email</td><td>Label: Email, placeholder: email@example.com</td><td>On submit, validate format</td><td>Required, valid email format, MSG-ERR-01 on invalid</td></tr>
+<tr><td>Password</td><td>Label: Password, type: password</td><td>On submit, validate not empty</td><td>Required, MSG-ERR-01 on invalid</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="user-actions">User Actions</h2>
+
+<table>
+<thead>
+<tr><th>Action</th><th>Trigger</th><th>Outcome</th></tr>
+</thead>
+<tbody>
+<tr><td>Submit</td><td>Click Login button</td><td>System validates credentials, redirects to dashboard or shows error</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="states">States</h2>
+
+<table>
+<thead>
+<tr><th>State ID</th><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>SCR-01-DEFAULT</td><td>Default</td><td>Empty form</td></tr>
+<tr><td>SCR-01-ERROR</td><td>Error</td><td>Invalid credentials shown</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="ascii-wireframe">ASCII Wireframe</h2>
+
+<h3 id="default-state">Default State</h3>
+
+<pre><code>+--------------------------------------------------+
+| Login                                            |
++--------------------------------------------------+
+| Email:    [________________________]             |
+| Password: [________________________]             |
+|                                                  |
+|           [        Login         ]               |
++--------------------------------------------------+
+</code></pre>
+
+<h3 id="error-state">Error State</h3>
+
+<pre><code>+--------------------------------------------------+
+| Login                                            |
++--------------------------------------------------+
+| Email:    [________________________]             |
+| Password: [________________________]             |
+| ! Invalid email or password.                     |
+|           [        Login         ]               |
++--------------------------------------------------+
+</code></pre>
+<div class="page-break"></div>
+<h2 id="tham-chi-u-wireframe-mockup-th-c-ng-manual-wireframe-mockup-reference">Tham chiếu Wireframe / Mockup thủ công (Manual Wireframe / Mockup Reference)</h2>
+<ul>
+<li>Hình thức tham chiếu: [Ảnh dán trực tiếp | Link Figma | Link Drive | File cục bộ]</li>
+<li>Đường dẫn / liên kết: [Điền thủ công]</li>
+<li>Người cập nhật: [Tên]</li>
+<li>Cập nhật lần cuối: [YYYY-MM-DD]</li>
+</ul>
+
+<blockquote>User tự chịu trách nhiệm dán ảnh, nhúng link, hoặc thêm ghi chú tham chiếu phù hợp vào mục này sau khi wireframe/mockup được thiết kế.</blockquote>
+
+<div class="page-break"></div>
+<h2 id="thi-t-k-m-n-h-nh-screen-design-intent">Ý đồ thiết kế màn hình (Screen Design Intent)</h2>
+<p>Giải thích màn hình đang tối ưu cho điều gì: tốc độ nhập dữ liệu, hoàn thành có hướng dẫn, xem lại trước khi gửi, hoặc quét dashboard.</p>
+
+<div class="page-break"></div>
+<h2 id="v-ng-m-n-h-nh-screen-regions">Vùng màn hình (Screen Regions)</h2>
+<table>
+<thead>
+<tr><th>Vùng (Region)</th><th>Mục đích (Purpose)</th><th>Nội dung (Contents)</th></tr>
+</thead>
+<tbody>
+<tr><td>Header</td><td>[Mục đích]</td><td>[Tiêu đề, breadcrumb, trạng thái]</td></tr>
+<tr><td>Nội dung chính (Main Content)</td><td>[Mục đích]</td><td>[Form, bảng, panel chi tiết]</td></tr>
+<tr><td>Vùng hành động (Action Area)</td><td>[Mục đích]</td><td>[Hành động chính và phụ]</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="tham-chi-u-quy-t-c-th-ng-i-p-d-ng-chung-shared-rule-message-references">Tham chiếu quy tắc/thông điệp dùng chung (Shared Rule/Message References)</h2>
+<p>Các rule/message dùng chung không được định nghĩa lại trong SRS module. Chúng phải được khai báo ở backbone registries rồi SRS chỉ tham chiếu bằng code.</p>
+
+<table>
+<thead>
+<tr><th>Registry</th><th>Path</th><th>Usage</th></tr>
+</thead>
+<tbody>
+<tr><td>Common Rules</td><td><code>02_backbone/common-rules.md</code></td><td>Khai báo rule code <code>CR-*</code> dùng chung</td></tr>
+<tr><td>Message List</td><td><code>02_backbone/message-list.md</code></td><td>Khai báo message code <code>MSG-*</code> dùng chung</td></tr>
+<tr><td>Shared Rule Message Index</td><td><code>02_backbone/shared-rule-message-index.md</code></td><td>Index gọn để kiểm tra code trước khi mở registry đầy đủ</td></tr>
+</tbody>
+</table>
+
+<p><strong>Rule code đang dùng trong module này</strong></p>
+<ul>
+<li>[CR-DIS-01]</li>
+<li>[CR-BEH-01]</li>
+<li>[CR-VAL-01]</li>
+</ul>
+
+<p><strong>Message code đang dùng trong module này</strong></p>
+<ul>
+<li>[MSG-ERR-01]</li>
+<li>[MSG-SUC-01]</li>
+</ul>
+
+<div class="page-break"></div>
+<h2 id="ascii-wireframes">ASCII Wireframes</h2>
+<p>ASCII wireframe là bắt buộc cho mọi UI-backed screen và phải được compile từ screen canon. User có thể dán thêm ảnh/mockup/link sau đó, nhưng mockup ngoài không thay thế ASCII trong <code>ascii-screen/*.md</code>.</p>
+
+<pre><code class="language-text">+--------------------------------------------------+
+| Header: Tiêu đề / Breadcrumb / Trạng thái        |
++----------------------+---------------------------+
+| Panel trái           | Nội dung chính            |
+| Điều hướng / Bộ lọc  | Trường form / bảng        |
+|                      |                           |
+|                      | [Hành động chính] [Hủy]   |
++----------------------+---------------------------+
+| Footer / Trợ giúp / Thông tin kiểm toán          |
++--------------------------------------------------+
+</code></pre>
+
+<p><strong>Checklist gắn thủ công</strong></p>
+<ul>
+<li>[Chèn wireframe/mockup của màn hình này]</li>
+<li>[Bảo đảm mockup thể hiện đủ action, field, states, và vùng màn hình đã mô tả]</li>
+<li>[Nếu supporting frames tồn tại, đính kèm thêm hoặc ghi rõ cách tham chiếu]</li>
+</ul>
+
+<table>
+<thead>
+<tr><th>Tên trường (Field Name)</th><th>Loại trường (Field Type)</th><th>Mô tả (Description)</th></tr>
+</thead>
+<tbody>
+<tr><td>[Tên trường]</td><td>[Text / Dropdown / Date Picker / Checkbox / Button / Table / etc.]</td><td><strong>Display Rules:</strong> [Mô tả cách field hiển thị: label, placeholder, visibility, giá trị mặc định, điều kiện read-only, định dạng, helper text nếu có]</td></tr>
+<tr><td></td><td></td><td><strong>Behaviour Rules:</strong> [Mô tả cách field tương tác: on-click, on-change, auto-fill, cascading, enable/disable field khác, điều hướng sang màn hình hoặc modal nào]</td></tr>
+<tr><td></td><td></td><td><strong>Validation Rules:</strong> [Mô tả rõ required, format, range, cross-field validation, cách hiển thị lỗi (inline / toast / banner), message code hoặc message text cụ thể]</td></tr>
+<tr><td></td><td></td><td><strong>Rule Codes:</strong> [CR-DIS-01, CR-VAL-01]</td></tr>
+<tr><td></td><td></td><td><strong>Message Codes:</strong> [MSG-ERR-01, MSG-INF-01]</td></tr>
+</tbody>
+</table>
+
+<blockquote>Nếu một quy tắc hoặc thông điệp lặp lại ở nhiều màn hình, tham chiếu <code>Rule Code</code> và <code>Message Code</code> từ backbone registries thay vì mô tả lại nguyên văn. Nếu cần ngoại lệ riêng cho màn hình, ghi rõ override ở field và đề xuất cập nhật registry khi ngoại lệ trở thành reusable.</blockquote>
+
+<p><strong>Hành động người dùng (User Actions)</strong></p>
+<ul>
+<li>[Hành động chính và hành vi]</li>
+<li>[Hành động phụ và hành vi]</li>
+</ul>
+
+<p><strong>Trạng thái (States)</strong></p>
+<ul>
+<li>Loading: [Trạng thái UI mong đợi]</li>
+<li>Rỗng (Empty): [Trạng thái UI mong đợi]</li>
+<li>Không có kết quả (No results): [Trạng thái UI khi bộ lọc hoặc tìm kiếm không trả kết quả]</li>
+<li>Thành công (Success): [Trạng thái UI mong đợi]</li>
+<li>Lỗi (Error): [Trạng thái UI mong đợi]</li>
+<li>Toast / banner / inline message: [Bề mặt phản hồi và điều kiện kích hoạt]</li>
+<li>Vô hiệu/Chỉ đọc (Disabled/Read-only): [Trạng thái UI mong đợi]</li>
+</ul>
+
+<p><strong>Quy tắc phân quyền và hiển thị (Permission and Visibility Rules)</strong></p>
+<ul>
+<li>[Vai trò nào có thể xem hoặc thao tác trên control nào]</li>
+</ul>
+
+<p><strong>Rule Codes sử dụng trong màn hình này (Applied Rule Codes)</strong></p>
+<ul>
+<li>[CR-DIS-01]</li>
+<li>[CR-BEH-01]</li>
+<li>[CR-VAL-01]</li>
+</ul>
+
+<p><strong>Message Codes sử dụng trong màn hình này (Applied Message Codes)</strong></p>
+<ul>
+<li>[MSG-ERR-01]</li>
+<li>[MSG-SUC-01]</li>
+</ul>
+
+<p><strong>Liên kết User Stories / Use Cases / Requirements</strong></p>
+<ul>
+<li>User stories: [US-001, US-002]</li>
+<li>Use cases: [UC-01, UC-02]</li>
+<li>Requirements: [FR-01, FR-02, BR-01]</li>
+</ul>
+
+<div class="page-break"></div>
+<h2 id="y-u-c-u-phi-ch-c-n-ng-non-functional-requirements">Yêu cầu phi chức năng (Non-Functional Requirements)</h2>
+<table>
+<thead>
+<tr><th>Mã (ID)</th><th>Danh mục (Category)</th><th>Yêu cầu (Requirement)</th><th>Mục tiêu (Target)</th></tr>
+</thead>
+<tbody>
+<tr><td>NFR-auth-001</td><td>Hiệu năng</td><td>Login response &lt; 2s</td><td>95th percentile</td></tr>
+</tbody>
+</table>
+<div class="page-break"></div>
+<h2 id="s-lu-ng-d-li-u-data-flow-diagrams">Sơ đồ luồng dữ liệu (Data Flow Diagrams)</h2>
+<pre class="mermaid">flowchart LR
+  U[Người dùng] --> S[Hệ thống]
+  S --> D[(Kho dữ liệu)]
+  D --> S
+</pre>
+
+<div class="page-break"></div>
+<h2 id="s-th-c-th-quan-h-entity-relationship-diagram">Sơ đồ thực thể quan hệ (Entity Relationship Diagram)</h2>
+<pre class="mermaid">erDiagram
+  ENTITY_ONE ||--o{ ENTITY_TWO : relates_to
+  ENTITY_ONE {
+    string id
+    string name
+  }
+</pre>
+
+<div class="page-break"></div>
+<h2 id="c-t-api-api-specifications">Đặc tả API (API Specifications)</h2>
+<ul>
+<li>Endpoint:</li>
+<li>Method:</li>
+<li>Request schema:</li>
+<li>Response schema:</li>
+<li>Xử lý lỗi:</li>
+</ul>
+
+<div class="page-break"></div>
+<h2 id="r-ng-bu-c-constraints">Ràng buộc (Constraints)</h2>
+<ul>
+<li>Ràng buộc kỹ thuật:</li>
+<li>Ràng buộc pháp lý:</li>
+<li>Ràng buộc vận hành:</li>
+</ul>
+
+<div class="page-break"></div>
+<h2 id="k-ch-b-n-ki-m-th-test-cases">Kịch bản kiểm thử (Test Cases)</h2>
+<table>
+<thead>
+<tr><th>Mã (ID)</th><th>Kịch bản (Scenario)</th><th>Kết quả mong đợi (Expected Result)</th><th>Ưu tiên (Priority)</th></tr>
+</thead>
+<tbody>
+<tr><td>TC-01</td><td>[Kịch bản]</td><td>[Kết quả mong đợi]</td><td>[Ưu tiên]</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="b-ng-thu-t-ng-glossary">Bảng thuật ngữ (Glossary)</h2>
+<table>
+<thead>
+<tr><th>Thuật ngữ (Term)</th><th>Định nghĩa (Definition)</th></tr>
+</thead>
+<tbody>
+<tr><td>[Thuật ngữ]</td><td>[Định nghĩa]</td></tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+<h2 id="t-i-li-u-li-n-quan-related-templates">Tài liệu liên quan (Related Templates)</h2>
+<ul>
+<li><a href="./frd-template.md">FRD Template</a></li>
+<li><a href="./userstory-item-template.md">User Story Template</a></li>
+<li><a href="./intake-form-template.md">Intake Form Template</a></li>
+</ul>
+
+  </main>
+  <div id="wireframe-lightbox" class="wireframe-lightbox" aria-hidden="true">
+    <div class="wireframe-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Wireframe preview">
+      <button class="editor-button wireframe-lightbox__close" data-action="close-lightbox" type="button">Close</button>
+      <img id="wireframe-lightbox-image" class="wireframe-lightbox__image" alt="">
+      <div id="wireframe-lightbox-caption" class="wireframe-lightbox__caption"></div>
+    </div>
+  </div>
+</div>
+<script>
+const MermaidRenderer = (() => {
+  async function init() {
+    if (!window.mermaid) return;
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'neutral',
+      fontFamily: 'inherit',
+    });
+
+    try {
+      await mermaid.run({ querySelector: 'pre.mermaid' });
+    } catch (error) {
+      console.error('Failed to render Mermaid diagrams.', error);
+      document.querySelectorAll('pre.mermaid').forEach((node) => {
+        node.classList.add('mermaid-render-error');
+      });
+    }
+  }
+
+  return { init };
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+  MermaidRenderer.init();
+});
+</script>
+</body>
+</html>
